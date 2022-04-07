@@ -1,0 +1,10 @@
+__pycache__
+*.pyc
+.venv/
+.coverage
+.pytest_cache/
+.vim
+dist/
+*.swp
+coverage.xml
+*.log

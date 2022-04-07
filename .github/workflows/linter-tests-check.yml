@@ -17,7 +17,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install poetry
-          poetry installl
+          poetry install
       - name: Run linter
         run: |
           make lint

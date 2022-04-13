@@ -29,6 +29,7 @@ SECRET_KEY = 'django-insecure-a=r&-&k#0zi!+rhjvom!yqg2#$!cz-nq*&p+8qqwcy(83!nuu5
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    "sleepy-sierra-07393.herokuapp.com",
     "localhost",
     "127.0.0.1",
     "webserver",

@@ -1,5 +1,15 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block title %}Task manager{% endblock %}
 {% block content %}
-<h1>Менеджер задач Хекслет</h1>
+<div class="container wrapper flex-grow-1">
+    <div class="card">
+        <div class="card-body p-5 bg-dark">
+            <div class="display-4">{% translate 'Hello from Hexlet!' %}</div>
+            <p class="lead">{% translate 'Practical programming courses' %}</p>
+            <hr>
+            <a class="btn btn-primary btn-lg" href="#">{% translate 'Learn more' %}</a>
+        </div>
+    </div>
+</div>
 {% endblock %}

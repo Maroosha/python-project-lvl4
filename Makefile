@@ -7,4 +7,7 @@ requirements:
 locale:
 	poetry run django-admin makemessages -l ru
 
+compile:
+	poetry run django-admin compilemessages --ignore=env
+
 .PHONY: run

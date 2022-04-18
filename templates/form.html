@@ -3,9 +3,15 @@
 {% load bootstrap4 %}
 {% block title %}{{ title }}{% endblock %}
 {% block content %}
-<form method="post">
-    {% csrf_token %}
-    {% bootstrap_form form %}
-    {% bootstrap_button button_text button_type="submit" button_class="btn-primary" %}
-</form>
+<div class="container wrapper flex-grow-1">
+    <div class="card">
+        <div class="card-body p-5 bg-light mt-5 pt-4 pb-16">
+            <form method="post">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                {% bootstrap_button button_text button_type="submit" button_class="btn-primary" %}
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -22,6 +22,7 @@ class UserList(ListView):
 
 class CreateUser(CreateView, SuccessMessageMixin):
     '.'
+    model = User
     template_name = 'form.html'
     form_class = CreateUserForm
     success_url = reverse_lazy('login')
@@ -38,6 +39,7 @@ class CreateUser(CreateView, SuccessMessageMixin):
 
 class ChangeUser(UpdateView, SuccessMessageMixin):
     '.'
+    model = User
     template_name = 'form.html'
     form_class = CreateUserForm
     success_url = reverse_lazy('users:list')

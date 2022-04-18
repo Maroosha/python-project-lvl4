@@ -67,7 +67,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-AUTH_USER_MODEL = "task_manager.User"
+AUTH_USER_MODEL = "task_manager.users.User"
 
 ROOT_URLCONF = 'task_manager.urls'
 

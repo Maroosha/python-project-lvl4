@@ -54,7 +54,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'task_manager.users',
-    'task_manager.users.User',
     'bootstrap4',
 ]
 
@@ -68,7 +67,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-AUTH_USER_MODEL = "task_manager.users.User"
+AUTH_USER_MODEL = "users.User"
 
 ROOT_URLCONF = 'task_manager.urls'
 

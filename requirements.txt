@@ -27,18 +27,18 @@ dj-database-url==0.5.0 \
 django-bootstrap4==22.1; python_version >= "3.7" \
     --hash=sha256:fc9984f7238fbcd330ec5111bf0435083caa7192b022eedd53bfa4128bee318f \
     --hash=sha256:b6da4cb54682012ff8baa1a1e672ba30cbfae82fb3d74f4b341109074e8e239f
-django==4.0.3; python_version >= "3.8" \
-    --hash=sha256:1239218849e922033a35d2a2f777cb8bee18bd725416744074f455f34ff50d0c \
-    --hash=sha256:77ff2e7050e3324c9b67e29b6707754566f58514112a9ac73310f60cd5261930
+django==4.0.4; python_version >= "3.8" \
+    --hash=sha256:07c8638e7a7f548dc0acaaa7825d84b7bd42b10e8d22268b3d572946f1e9b687 \
+    --hash=sha256:4e8177858524417563cc0430f29ea249946d831eacb0068a1455686587df40b5
 gunicorn==20.1.0; python_version >= "3.5" \
     --hash=sha256:9dcc4547dbb1cb284accfb15ab5667a0e5d1881cc443e0677b4882a4067a807e \
     --hash=sha256:e0a968b5ba15f8a328fdfd7ab1fcb5af4470c28aaf7e55df02a99bc13138e6e8
 python-dotenv==0.20.0; python_version >= "3.5" \
     --hash=sha256:b7e3b04a59693c42c36f9ab1cc2acc46fa5df8c78e178fc33a8d4cd05c8d498f \
     --hash=sha256:d92a187be61fe482e4fd675b6d52200e7be63a12b724abbf931a40ce4fa92938
-soupsieve==2.3.2; python_full_version >= "3.6.0" and python_version >= "3.7" \
-    --hash=sha256:a714129d3021ec17ce5be346b1007300558b378332c289a1a20e7d4de6ff18a5 \
-    --hash=sha256:0bcc6d7432153063e3df09c3ac9442af3eba488715bfcad6a4c38ccb2a523124
+soupsieve==2.3.2.post1; python_full_version >= "3.6.0" and python_version >= "3.7" \
+    --hash=sha256:3b2503d3c7084a42b1ebd08116e5f81aadfaea95863628c80a3b774a11b7c759 \
+    --hash=sha256:fc53893b3da2c33de295667a0e19f078c14bf86544af307354de5fcf12a3f30d
 sqlparse==0.4.2; python_version >= "3.8" \
     --hash=sha256:48719e356bb8b42991bdbb1e8b83223757b93789c00910a616a071910ca4a64d \
     --hash=sha256:0c00730c74263a94e5a9919ade150dfc3b19c574389985446148402998287dae

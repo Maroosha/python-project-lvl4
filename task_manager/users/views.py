@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from django.urls import reverse_lazy

@@ -1,12 +1,14 @@
-from dataclasses import fields
+# from dataclasses import fields
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
 
 class CreateUserForm(UserCreationForm):
     'User form.'
     class Meta:
         'User details.'
+        User = get_user_model()
         model = User
         fields = [
             'first_name',

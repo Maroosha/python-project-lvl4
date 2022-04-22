@@ -10,4 +10,13 @@ locale:
 compile:
 	poetry run django-admin compilemessages --ignore=env
 
+makemigrations:
+	poetry run python3 manage.py makemigrations
+
+makemigrations_users:
+	poetry run python3 manage.py makemigrations users
+
+migrate:
+	poetry run python3 manage.py migrate
+
 .PHONY: run

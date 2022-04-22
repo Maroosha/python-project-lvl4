@@ -5,4 +5,4 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/d201003645672fd4ffce/test_coverage)](https://codeclimate.com/github/Maroosha/python-project-lvl4/test_coverage)
 
 ## App at Heroku:
-https://sleepy-sierra-07393.herokuapp.com/
+https://afternoon-shore-73997.herokuapp.com/

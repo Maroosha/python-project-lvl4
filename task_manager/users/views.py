@@ -4,6 +4,10 @@ from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy
 from .forms import CreateUserForm
+from django.contrib.auth import get_user_model
+
+
+User = get_user_model()
 
 
 class UserList(ListView):

@@ -63,7 +63,7 @@ MIDDLEWARE_CLASSES = (
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
+    'django.middleware.locale.LocaleMiddleware',  # translation
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -103,20 +103,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#        'NAME': os.environ.get("DB_NAME"),
-#        'USER': os.environ.get("DB_USER"),
-#        'PASSWORD': os.environ.get("DB_PASSWORD"),
-#        'HOST': os.environ.get("DB_HOST"),
-#        'PORT': os.environ.get("DB_PORT"),
-#    }
-#}
-
-#if not DEBUG:
-#    DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 
 database = dj_database_url.config(conn_max_age=500, ssl_require=True)
 
@@ -168,9 +154,7 @@ STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Extra places for collectstatic to find static files.
-#STATICFILES_DIRS = (
-#    os.path.join(BASE_DIR, 'static'),
-#)
+
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type

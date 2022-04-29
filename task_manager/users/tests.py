@@ -16,7 +16,7 @@ class UsersTest(TestCase):
         self.user2 = User.objects.get(pk=3)
 
 
-    def test_users_list(self):  # TEST PASSED
+    def test_users_list(self):
         "Test users list."
         # Issue a GET request.
         response = self.client.get(reverse('users:list'))

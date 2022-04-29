@@ -12,11 +12,10 @@ compile:
 
 makemigrations:
 	poetry run python3 manage.py makemigrations
+	poetry run python3 manage.py migrate
 
 makemigrations_users:
 	poetry run python3 manage.py makemigrations users
-
-migrate:
 	poetry run python3 manage.py migrate
 
 test:

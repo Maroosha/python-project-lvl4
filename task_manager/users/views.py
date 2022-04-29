@@ -24,7 +24,7 @@ class UserList(ListView):
         return context
 
 
-class CreateUser(CreateView, SuccessMessageMixin):
+class CreateUser(SuccessMessageMixin, CreateView):
     '.'
     model = User
     template_name = 'form.html'
@@ -41,7 +41,7 @@ class CreateUser(CreateView, SuccessMessageMixin):
         return context
 
 
-class ChangeUser(UpdateView, SuccessMessageMixin):
+class ChangeUser(SuccessMessageMixin, UpdateView):
     '.'
     model = User
     template_name = 'form.html'
@@ -58,7 +58,7 @@ class ChangeUser(UpdateView, SuccessMessageMixin):
         return context
 
 
-class DeleteUser(DeleteView, SuccessMessageMixin):
+class DeleteUser(SuccessMessageMixin, DeleteView):
     '.'
     model = User
     template_name = 'delete.html'

@@ -19,4 +19,7 @@ makemigrations_users:
 migrate:
 	poetry run python3 manage.py migrate
 
-.PHONY: run
+test:
+	poetry run python3 manage.py test
+
+.PHONY: run test locale

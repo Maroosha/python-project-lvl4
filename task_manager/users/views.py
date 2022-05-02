@@ -1,7 +1,7 @@
-from django.contrib import messages
+# from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from django.shortcuts import redirect
+# from django.shortcuts import redirect
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy
@@ -40,11 +40,14 @@ class CreateUser(SuccessMessageMixin, CreateView):
         context = super().get_context_data(**kwargs)
         context['title'] = gettext_lazy('Create user')
         context['button_text'] = gettext_lazy('Register')
-        messages.success('User successfully created.')
         return context
 
 
-class ChangeUser(SuccessMessageMixin, UpdateView):
+class ChangeUser(
+    LoginRequiredMixin,
+    SuccessMessageMixin,
+    UpdateView,
+):
     '.'
     model = User
     template_name = 'form.html'
@@ -69,7 +72,11 @@ change another user.')
         return context
 
 
-class DeleteUser(SuccessMessageMixin, DeleteView):
+class DeleteUser(
+    LoginRequiredMixin,
+    SuccessMessageMixin,
+    DeleteView,
+):
     '.'
     model = User
     template_name = 'delete.html'

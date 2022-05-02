@@ -35,12 +35,12 @@ class CreateUser(SuccessMessageMixin, CreateView):
     success_message = gettext_lazy('User successfully created.')
 
 
-    def get_context_data(self, request, **kwargs):
+    def get_context_data(self, **kwargs):
         '.'
         context = super().get_context_data(**kwargs)
         context['title'] = gettext_lazy('Create user')
         context['button_text'] = gettext_lazy('Register')
-        messages.success(request, 'User successfully created.')
+        messages.success('User successfully created.')
         return context
 
 

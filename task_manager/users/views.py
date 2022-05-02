@@ -54,9 +54,9 @@ class ChangeUser(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 change another user.')
 
 
-    def get_context_data(self, request, **kwargs):
+    def get_context_data(self, request, *args, **kwargs):
         '.'
-        context = super().get_context_data(**kwargs)
+        context = super().get_context_data(request, *args, **kwargs)
         context['title'] = gettext_lazy('Change user')
         context['button_text'] = gettext_lazy('Change')
         # forbid a user to change anyone else's account
@@ -78,9 +78,9 @@ class DeleteUser(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
 change another user.')
 
 
-    def get_context_data(self, request, **kwargs):
+    def get_context_data(self, request, *args, **kwargs):
         '.'
-        context = super().get_context_data(**kwargs)
+        context = super().get_context_data(request, *args, **kwargs)
         context['title'] = gettext_lazy('Delete user')
         context['button_text'] = gettext_lazy('Delete')
         # forbid a user deleting anyone else's account

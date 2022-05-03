@@ -43,13 +43,13 @@ msgstr "Статусы"
 #, fuzzy
 #| msgid "User successfully created."
 msgid "Status successfully created."
-msgstr "Пользователь успешно зарегистрирован"
+msgstr "Статус успешно создан."
 
 #: task_manager/statuses/views.py:35
 #, fuzzy
 #| msgid "Create user"
 msgid "Create status"
-msgstr "Регистрация"
+msgstr "Создать статус"
 
 #: task_manager/statuses/views.py:36
 #, fuzzy
@@ -61,7 +61,7 @@ msgstr "Регистрация"
 #, fuzzy
 #| msgid "User successfully changed."
 msgid "Status successfully changed."
-msgstr "Пользователь успешно изменён."
+msgstr "Статус успешно изменён."
 
 #: task_manager/statuses/views.py:52
 #, fuzzy
@@ -78,7 +78,7 @@ msgstr "Изменить"
 #, fuzzy
 #| msgid "User successfully deleted."
 msgid "Status successfully deleted."
-msgstr "Пользователь успешно удалён."
+msgstr "Статус успешно удалён."
 
 #: task_manager/statuses/views.py:68
 #, fuzzy
@@ -89,7 +89,7 @@ msgstr "Удалить пользователя"
 #: task_manager/statuses/views.py:69 task_manager/users/views.py:85
 #: templates/statuses.html:28 templates/users.html:30
 msgid "Delete"
-msgstr "удалить"
+msgstr "Удалить"
 
 #: task_manager/users/tests.py:64 task_manager/users/views.py:35
 msgid "User successfully created."
@@ -147,7 +147,7 @@ msgstr "Менеджер задач"
 #, fuzzy
 #| msgid "Log in"
 msgid "Log out"
-msgstr "Войти"
+msgstr "Выйти"
 
 #: templates/delete.html:9
 msgid "Are you sure you want to delete"
@@ -169,7 +169,7 @@ msgstr "Узнать больше"
 #, fuzzy
 #| msgid "Create user"
 msgid "Create a status"
-msgstr "Регистрация"
+msgstr "Создать статус"
 
 #: templates/users.html:14
 msgid "User name"

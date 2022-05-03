@@ -18,6 +18,11 @@ makemigrations_users:
 	poetry run python3 manage.py makemigrations users
 	poetry run python3 manage.py migrate
 
+makemigrations_statuses:
+	poetry run python3 manage.py makemigrations statuses
+	poetry run python3 manage.py migrate
+
+
 test:
 	poetry run python3 manage.py test
 

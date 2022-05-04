@@ -60,12 +60,11 @@ class StatusesTest(TestCase):
             follow=True,
         )
 
-        self.assertRedirects(response, '/statuses/')
+        self.assertRedirects(response, '/statuses/', status_code=302)
         self.assertContains(
             response,
             gettext_lazy('Status successfully created.'),
         )
-#        self.assertEqual(response.status_code, 302)  # why error? 200
 
         status = Status.objects.get(name=new_status['name'])
         self.assertEqual(3, status.id)
@@ -93,12 +92,11 @@ class StatusesTest(TestCase):
             follow=True,
         )
 
-        self.assertRedirects(response, '/statuses/')
+        self.assertRedirects(response, '/statuses/', status_code=302)
         self.assertContains(
             response,
             gettext_lazy('Status successfully changed.'),
         )
-#        self.assertEqual(response.status_code, 302)  # why error?
         new_status = Status.objects.get(name=changed_status['name'])
         self.assertEqual(status.id, new_status.id)
 
@@ -118,10 +116,9 @@ class StatusesTest(TestCase):
             reverse('statuses:delete', args=(status.id,)),
             follow=True,
         )
-#        self.assertEqual(response.status_code, 302)  # why error? 200
 
         with self.assertRaises(Status.DoesNotExist):
             Status.objects.get(pk=status.id)
         # Redirects and messages
-        self.assertRedirects(response, '/statuses/')
+        self.assertRedirects(response, '/statuses/', status_code=302)
         self.assertContains(response, gettext_lazy('Status successfully deleted.'))

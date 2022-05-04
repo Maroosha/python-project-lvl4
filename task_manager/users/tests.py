@@ -58,12 +58,11 @@ class UsersTest(TestCase):
         )
 
         # redirect to Login, check response status
-        self.assertRedirects(response, '/login/')
+        self.assertRedirects(response, '/login/', status_code=302)
         self.assertContains(
             response,
             gettext_lazy('User successfully created.'),
         )
-#        self.assertEqual(response.status_code, 302)  # why error? 200
         # Check user details
         new_user = User.objects.get(username=new_user['username'])
         self.assertEqual('Thorin', new_user.first_name)
@@ -100,12 +99,11 @@ class UsersTest(TestCase):
         )
 
         # redirect to Users, check response status
-        self.assertRedirects(response, '/users/')
+        self.assertRedirects(response, '/users/', status_code=302)
         self.assertContains(
             response,
             gettext_lazy('User successfully changed.'),
         )
-#        self.assertEqual(response.status_code, 302)  # why error? 200
         # Check user details
         new_user = User.objects.get(username=changed_user['username'])
         self.assertEqual('Mr.', new_user.first_name)
@@ -129,11 +127,10 @@ class UsersTest(TestCase):
             reverse('users:delete', args=(user.id,)),
             follow=True,
         )
-#        self.assertEqual(response.status_code, 302)  # why error? 200
 
         # make sure the user does not exist anymore
         with self.assertRaises(User.DoesNotExist):
             User.objects.get(pk=user.id)
         # Redirects and messages
-        self.assertRedirects(response, '/users/')
+        self.assertRedirects(response, '/users/', status_code=302)
         self.assertContains(response, gettext_lazy('User successfully deleted.'))

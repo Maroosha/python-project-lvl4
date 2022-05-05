@@ -14,8 +14,8 @@ class StatusesTest(TestCase):
 
     def setUp(self):
         "Set up statuses."
-        # Statuses are seen by logged in users only
         self.faker = Faker()
+        # Statuses are seen by logged in users only => self.user
         self.user = User.objects.get(pk=3)
         self.status1 = Status.objects.get(pk=1)
         self.status2 = Status.objects.get(pk=2)

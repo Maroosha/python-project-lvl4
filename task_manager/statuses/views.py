@@ -8,9 +8,9 @@ from .forms import StatusForm
 
 
 class StatusesList(LoginRequiredMixin, ListView):
-    'Show a list of statuses.'
+    'Show the list of statuses.'
     model = Status
-    template_name = 'statuses.html'  # !!CREATE THAT ONE!!
+    template_name = 'statuses.html'
     context_object_name = 'statuses'
 
     def get_context_data(self, **kwargs):
@@ -36,7 +36,7 @@ class CreateStatus(
     def get_context_data(self, **kwargs):
         '.'
         context = super().get_context_data(**kwargs)
-        context['title'] = gettext_lazy('Create status')
+        context['title'] = gettext_lazy('Create a status')
         context['button_text'] = gettext_lazy('Create')
         return context
 
@@ -57,7 +57,7 @@ class ChangeStatus(
     def get_context_data(self, **kwargs):
         '.'
         context = super().get_context_data(**kwargs)
-        context['title'] = gettext_lazy('Change status')
+        context['title'] = gettext_lazy('Change a status')
         context['button_text'] = gettext_lazy('Change')
         return context
 
@@ -77,6 +77,6 @@ class DeleteStatus(
     def get_context_data(self, **kwargs):
         '.'
         context = super().get_context_data(**kwargs)
-        context['title'] = gettext_lazy('Delete status')
+        context['title'] = gettext_lazy('Delete a status')
         context['button_text'] = gettext_lazy('Delete')
         return context

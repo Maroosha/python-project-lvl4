@@ -4,7 +4,7 @@ from django.utils.translation import gettext_lazy
 
 # http://www.learningaboutelectronics.com/Articles/verbose-name-and-verbose-name-plural-in-Django.php
 class Status(models.Model):
-    "Model of a task status."
+    "Model for a status."
     name = models.CharField(
         max_length=100,
         null=False,

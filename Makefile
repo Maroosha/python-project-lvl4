@@ -22,6 +22,9 @@ makemigrations_statuses:
 	poetry run python3 manage.py makemigrations statuses
 	poetry run python3 manage.py migrate
 
+makemigrations_tasks:
+	poetry run python3 manage.py makemigrations tasks
+	poetry run python3 manage.py migrate
 
 test:
 	poetry run python3 manage.py test

@@ -24,7 +24,7 @@ class Task(models.Model):
     created_by = models.ForeignKey(
         User,
         on_delete=models.PROTECT,
-        related_name='Created by',
+        related_name='Created_by',
     )
     executive = models.ForeignKey(
         User,
@@ -48,3 +48,4 @@ class Task(models.Model):
         "Meta class."
         verbose_name = gettext_lazy('Task')
         verbose_name_plural = gettext_lazy('Tasks')
+        ordering = ['id']

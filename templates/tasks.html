@@ -28,11 +28,11 @@
                         <td>{{ task.status }}</td>
                         <td>{{ task.created_by }}</td>
                         <td>{{ task.executive }}</td>
-                        <td>{{ status.created_at }}</td>
+                        <td>{{ task.created_at }}</td>
                         <td>
-                            <a href="{% url 'tasks:change' status.id %}">{% translate "Change" %}</a>
+                            <a href="{% url 'tasks:change' task.id %}">{% translate "Change" %}</a>
                             <br>
-                            <a href="{% url 'tasks:delete' status.id %}">{% translate "Delete" %}</a>
+                            <a href="{% url 'tasks:delete' task.id %}">{% translate "Delete" %}</a>
                         </td>
                     </tr>
                     {% endfor %}

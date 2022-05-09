@@ -27,3 +27,4 @@ class Status(models.Model):
         "Meta class."
         verbose_name = gettext_lazy('Status')
         verbose_name_plural = gettext_lazy('Statuses')
+        ordering = ['id']

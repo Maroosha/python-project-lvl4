@@ -1,6 +1,8 @@
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import AccessMixin, LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from django.db.models import ProtectedError
+from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from django.urls import reverse_lazy
@@ -10,6 +12,23 @@ from django.contrib.auth import get_user_model
 
 
 User = get_user_model()
+
+
+class EditUserMixin(AccessMixin):
+    "Edit an account."
+    error_message = gettext_lazy('You do not have a permission to \
+change another user.')
+    success_url = reverse_lazy('users:list')
+
+
+    def dispatch(self, request, *args, **kwargs):
+        "Check if the user can edit/delete the given account."
+        print(f'kwargs = {kwargs}')
+        print(f'self.request.user.id = {self.request.user.id}')
+        if kwargs['pk'] != self.request.user.id:
+            messages.error(self.request, self.error_message)
+            return redirect(self.success_url)
+        return super().dispatch(request, *args, **kwargs)
 
 
 class UserList(ListView):
@@ -45,6 +64,7 @@ class CreateUser(SuccessMessageMixin, CreateView):
 
 class ChangeUser(
     LoginRequiredMixin,
+    EditUserMixin,
     SuccessMessageMixin,
     UpdateView,
 ):
@@ -54,8 +74,6 @@ class ChangeUser(
     form_class = CreateUserForm
     success_url = reverse_lazy('users:list')
     success_message = gettext_lazy('User successfully changed.')
-    error_message = gettext_lazy('You do not have a permission to \
-change another user.')
 
 
     def get_context_data(self, **kwargs):
@@ -63,18 +81,13 @@ change another user.')
         context = super().get_context_data(**kwargs)
         context['title'] = gettext_lazy('Change a user')
         context['button_text'] = gettext_lazy('Change')
-        # forbid a user to change anyone else's account
-#        if request.user != self.get_object():
-#            messages.error(
-#                self.request, self.error_message,
-#            )
-#            return redirect('users:list')
         return context
 
 
 class DeleteUser(
     LoginRequiredMixin,
     SuccessMessageMixin,
+    EditUserMixin,
     DeleteView,
 ):
     '.'
@@ -82,8 +95,6 @@ class DeleteUser(
     template_name = 'delete.html'
     success_url = reverse_lazy('users:list')
     success_message = gettext_lazy('User successfully deleted.')
-    error_message = gettext_lazy('You do not have a permission to \
-change another user.')
 
 
     def get_context_data(self, **kwargs):
@@ -91,10 +102,16 @@ change another user.')
         context = super().get_context_data(**kwargs)
         context['title'] = gettext_lazy('Delete a user')
         context['button_text'] = gettext_lazy('Delete')
-        # forbid a user deleting anyone else's account
-#        if request.user != self.get_object():
-#            messages.error(
-#                self.request, self.error_message,
-#            )
-#            return redirect('users:list')
         return context
+
+
+    def form_valid(self, form):
+        "Check if any statuses or tasks are assigned to the given user."
+        try:
+            self.object.delete()
+        except ProtectedError:
+            error_user_in_use = 'Cannot delete a user in use.'
+            messages.error(self.request, error_user_in_use)
+        else:
+            messages.success(self.request, self.success_message)
+        return HttpResponseRedirect(self.success_url)

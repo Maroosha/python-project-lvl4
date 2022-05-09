@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy
 from faker import Faker
 from .models import Status
+from task_manager.tasks.models import Task
 
 User = get_user_model()
 

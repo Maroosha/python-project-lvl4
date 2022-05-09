@@ -8,7 +8,7 @@ class Status(models.Model):
     name = models.CharField(
         max_length=100,
         null=False,
-        verbose_name=gettext_lazy('Name')
+        verbose_name=gettext_lazy('Name'),
     )
     created_at = models.DateTimeField(
         auto_now_add=True,

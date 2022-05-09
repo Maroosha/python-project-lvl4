@@ -11,7 +11,7 @@ class Task(models.Model):
     name = models.CharField(  # max < 255 symbols
         max_length=100,
         null=False,
-        verbose_name=gettext_lazy('Name')
+        verbose_name=gettext_lazy('Name'),
     )
     description = models.TextField(
         verbose_name=gettext_lazy('Description'),

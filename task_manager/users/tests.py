@@ -2,18 +2,21 @@ from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
 from django.utils.translation import gettext_lazy
+from task_manager.tasks.models import Task
 
 User = get_user_model()
 
 
 class UsersTest(TestCase):
     "Test Users app."
-    fixtures = ['users.json']
+    fixtures = ['tasks.json', 'users.json']
 
     def setUp(self):  # sorta __init__(self): ...
         "Set up users."
         self.user1 = User.objects.get(pk=1)
-        self.user2 = User.objects.get(pk=3)
+        self.user2 = User.objects.get(pk=2)
+        self.task1 = Task.objects.get(pk=1)
+        self.task2 = Task.objects.get(pk=2)
 
 
     def test_users_list(self):
@@ -26,7 +29,7 @@ class UsersTest(TestCase):
         self.assertEqual(response.status_code, 200)
         # Checking whether the user info is correct
         self.assertEqual(user1.username, 'jsmith')
-        self.assertEqual(user1.first_name, 'John')
+        self.assertEqual(user1.first_name, 'john')
         self.assertEqual(user1.last_name, 'Smith')
         self.assertEqual(user2.username, 'janedoe')
         self.assertEqual(user2.first_name, 'Jane')
@@ -111,8 +114,22 @@ class UsersTest(TestCase):
         self.assertTrue(new_user.check_password('q1w2e3r4'))
 
 
+    def test_delete_user_with_tasks(self):
+        "Test delete user with a task."
+        user = self.user1  # creator of task2
+        response = self.client.post(reverse('users:delete', args=(user.id,)))
+        self.assertTrue(User.objects.filter(pk=user.id).exists())
+        self.assertRedirects(response, '/users/')
+        self.assertContains(
+            response,
+            gettext_lazy('Cannot delete a user in use.'),
+        )
+
+
     def test_delete_user(self):
         "Test delete user."
+        self.task1.delete()  # user1: creator
+        self.task2.delete()  # user1: creator, executive
         user = self.user1
         self.client.force_login(User.objects.get(pk=user.id))
         response = self.client.get(reverse('users:delete', args=(user.id,)))

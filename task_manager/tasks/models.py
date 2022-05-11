@@ -19,16 +19,19 @@ class Task(models.Model):
     status = models.ForeignKey(
         Status,
         on_delete=models.PROTECT,
+        null=True,
         related_name='Status',
     )
     created_by = models.ForeignKey(
         User,
         on_delete=models.PROTECT,
+        null=False,
         related_name='Created_by',
     )
     executive = models.ForeignKey(
         User,
         on_delete=models.PROTECT,
+        null=True,
         related_name='Executive',
     )
     created_at = models.DateTimeField(

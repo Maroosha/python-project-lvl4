@@ -3,18 +3,18 @@
     "model": "statuses.status",
     "pk": 1,
     "fields": {
-        "name": "new_status",
-        "created_at": "2022-05-03T11:06:18.723Z",
-        "modified_at": "2022-05-03T11:06:18.723Z"
+        "name": "Jane Doe's status",
+        "created_at": "2022-05-11T12:57:48.707Z",
+        "modified_at": "2022-05-11T12:57:48.707Z"
     }
 },
 {
     "model": "statuses.status",
     "pk": 2,
     "fields": {
-        "name": "nnss",
-        "created_at": "2022-05-03T12:02:45.186Z",
-        "modified_at": "2022-05-03T12:02:45.187Z"
+        "name": "John Smith's status",
+        "created_at": "2022-05-11T12:59:46.342Z",
+        "modified_at": "2022-05-11T12:59:46.342Z"
     }
 }
 ]

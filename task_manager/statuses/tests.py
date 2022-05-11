@@ -17,7 +17,7 @@ class StatusesTest(TestCase):
         "Set up statuses."
         self.faker = Faker()
         # Statuses are seen by logged in users only => self.user
-        self.user = User.objects.get(pk=3)
+        self.user = User.objects.get(pk=2)
         self.status1 = Status.objects.get(pk=1)
         self.status2 = Status.objects.get(pk=2)
 
@@ -34,9 +34,9 @@ class StatusesTest(TestCase):
 
         statuses_list = list(response.context['statuses'])
         status1, status2 = statuses_list
-        self.assertEqual(status1.name, 'new_status')
+        self.assertEqual(status1.name, 'Jane Doe\'s status')
         self.assertEqual(status1.id, 1)
-        self.assertEqual(status2.name, 'nnss')
+        self.assertEqual(status2.name, 'John Smith\'s status')
         self.assertEqual(status2.id, 2)
 
 
@@ -123,3 +123,4 @@ class StatusesTest(TestCase):
         # Redirects and messages
         self.assertRedirects(response, '/statuses/', status_code=302)
         self.assertContains(response, gettext_lazy('Status successfully deleted.'))
+

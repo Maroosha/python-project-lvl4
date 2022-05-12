@@ -9,7 +9,7 @@ User = get_user_model()
 
 class UsersTest(TestCase):
     "Test Users app."
-    fixtures = ['tasks.json', 'users.json']
+    fixtures = ['users.json', 'tasks.json']
 
     def setUp(self):  # sorta __init__(self): ...
         "Set up users."

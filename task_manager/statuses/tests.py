@@ -12,9 +12,9 @@ User = get_user_model()
 class StatusesTest(TestCase):
     "Test Statuses app."
     fixtures = [
-        'tasks.json',
-        'statuses.json',
         'users.json',
+        'statuses.json',
+        'tasks.json',
     ]
 
     def setUp(self):
@@ -118,7 +118,7 @@ class StatusesTest(TestCase):
         )
         self.assertTrue(User.objects.filter(pk=status.id).exists())
         self.assertRedirects(response, '/statuses/')
-        self.assertContains(gettext_lazy('Cannot delete a status in use.'))
+        self.assertContains(response, gettext_lazy('Cannot delete a status in use.'))
 
 
     def test_delete_status(self):

@@ -10,8 +10,12 @@ User = get_user_model()
 
 
 class StatusesTest(TestCase):
-    "Test Users app."
-    fixtures = ['statuses.json', 'users.json']
+    "Test Statuses app."
+    fixtures = [
+        'tasks.json',
+        'statuses.json',
+        'users.json',
+    ]
 
     def setUp(self):
         "Set up statuses."
@@ -20,6 +24,8 @@ class StatusesTest(TestCase):
         self.user = User.objects.get(pk=2)
         self.status1 = Status.objects.get(pk=1)
         self.status2 = Status.objects.get(pk=2)
+        self.task1 = Task.objects.get(pk=1)
+        self.task2 = Task.objects.get(pk=2)
 
 
     def test_statuses_list(self):
@@ -102,10 +108,25 @@ class StatusesTest(TestCase):
         self.assertEqual(status.id, new_status.id)
 
 
+    def test_delete_status_with_tasks(self):
+        "Test delete status with tasks."
+        self.client.force_login(self.user)
+        status = self.status1
+        response = self.client.post(
+            reverse('statuses:delete', args = (status.id,)),
+            follow=True,
+        )
+        self.assertTrue(User.objects.filter(pk=status.id).exists())
+        self.assertRedirects(response, '/statuses/')
+        self.assertContains(gettext_lazy('Cannot delete a status in use.'))
+
+
     def test_delete_status(self):
         "Test delete status."
         self.client.force_login(self.user)
         status = self.status1
+        self.task1.delete()
+        self.task2.delete()
         response = self.client.get(reverse('statuses:delete', args=(status.id,)))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
@@ -123,4 +144,3 @@ class StatusesTest(TestCase):
         # Redirects and messages
         self.assertRedirects(response, '/statuses/', status_code=302)
         self.assertContains(response, gettext_lazy('Status successfully deleted.'))
-

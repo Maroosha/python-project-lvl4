@@ -1,5 +1,6 @@
 from django.db import models
 from task_manager.statuses.models import Status
+from task_manager.labels.models import Label
 from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy
 
@@ -33,6 +34,11 @@ class Task(models.Model):
         on_delete=models.PROTECT,
         null=True,
         related_name='Executive',
+    )
+    labels = models.ManyToManyField(
+        Label,
+        related_name='Label',
+        blank=True,
     )
     created_at = models.DateTimeField(
         auto_now_add=True,

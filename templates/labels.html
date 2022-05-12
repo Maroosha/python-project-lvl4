@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+<div class="container wrapper flex-grow-1">
+    <div class="card">
+        <div class="card-body p-5 bg-light mt-5 pt-4 pb-16">
+            <h1 class="my-4">{{ title }}</h1>
+            <a class="nav-link" href="{% url 'labels:create' %}">{% translate "Create a label" %}</a>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>{% translate "Name" %}</th>
+                        <th>{% translate "Created at" %}</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for label in labels %}
+                    <tr>
+                        <td>{{ label.id }}</td>
+                        <td>{{ label.name }}</td>
+                        <td>{{ label.created_at }}</td>
+                        <td>
+                            <a href="{% url 'labels:change' label.id %}">{% translate "Change" %}</a>
+                            <br>
+                            <a href="{% url 'labels:delete' label.id %}">{% translate "Delete" %}</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

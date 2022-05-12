@@ -26,6 +26,10 @@ makemigrations_tasks:
 	poetry run python3 manage.py makemigrations tasks
 	poetry run python3 manage.py migrate
 
+makemigrations_labels:
+	poetry run python3 manage.py makemigrations labels
+	poetry run python3 manage.py migrate
+
 test:
 	poetry run python3 manage.py test
 

@@ -13,4 +13,5 @@ class TaskForm(forms.ModelForm):
             'status',
             'created_by',
             'executive',
+            'labels',
         ]

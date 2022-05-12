@@ -1,6 +1,7 @@
 [
 {
     "model": "users.user",
+    "pk": 1,
     "fields": {
         "password": "pbkdf2_sha256$320000$Jf9vBfhaikMuSpSvzAv5P9$n9mF2WsxqQqpvtX6GqRnClWH9PyZ0IAKg05x96wRB4o=",
         "last_login": "2022-05-11T12:59:30.812Z",
@@ -18,6 +19,7 @@
 },
 {
     "model": "users.user",
+    "pk": 2,
     "fields": {
         "password": "pbkdf2_sha256$320000$XJAj4O06qBCyEMl9OZATFB$WWyWC3LPQigsKHiB0kutDqMD/OgG+dZCxIA+gOrsWDs=",
         "last_login": "2022-05-11T12:57:13.055Z",

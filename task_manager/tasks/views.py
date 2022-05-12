@@ -43,7 +43,7 @@ class CreateTask(
 # https://github.com/django/django/search?p=1&q=form_valid
     def form_valid(self, form):
         """
-        Add the user as a task auther.
+        Add the user as a task creator.
 
         Called when correct data is entered into the form
         and the form has been successfully validated without any errors.

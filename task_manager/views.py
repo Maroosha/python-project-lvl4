@@ -10,7 +10,7 @@ class IndexPage(TemplateView):
     template_name = "index.html"
 
 
-class Login(LoginView):
+class Login(SuccessMessageMixin, LoginView):
     '.'
     template_name = 'form.html'
     success_message = gettext_lazy('Logged in successfully.')
@@ -25,7 +25,7 @@ class Login(LoginView):
         return context
 
 
-class Logout(LogoutView):
+class Logout(SuccessMessageMixin, LogoutView):
     '.'
 
 

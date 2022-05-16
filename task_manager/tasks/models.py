@@ -37,8 +37,10 @@ class Task(models.Model):
     )
     labels = models.ManyToManyField(
         Label,
-        related_name='Label',
+        related_name='label',
         blank=True,
+        through='TaskLabelRelation',
+        through_fields=('task', 'label'),
     )
     created_at = models.DateTimeField(
         auto_now_add=True,
@@ -58,3 +60,15 @@ class Task(models.Model):
         verbose_name = gettext_lazy('Task')
         verbose_name_plural = gettext_lazy('Tasks')
         ordering = ['id']
+
+
+class TaskLabelRelation(models.Model):
+    "Task to label relationship table."
+    task = models.ForeignKey(
+        Task,
+        on_delete=models.CASCADE,
+    )
+    label = models.ForeignKey(
+        Label,
+        on_delete=models.PROTECT,
+    )

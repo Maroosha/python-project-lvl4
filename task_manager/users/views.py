@@ -23,8 +23,6 @@ change another user.')
 
     def dispatch(self, request, *args, **kwargs):
         "Check if the user can edit/delete the given account."
-        print(f'kwargs = {kwargs}')
-        print(f'self.request.user.id = {self.request.user.id}')
         if kwargs['pk'] != self.request.user.id:
             messages.error(self.request, self.error_message)
             return redirect(self.success_url)

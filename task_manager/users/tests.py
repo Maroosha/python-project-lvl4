@@ -3,20 +3,25 @@ from django.test import TestCase
 from django.urls import reverse
 from django.utils.translation import gettext_lazy
 from task_manager.tasks.models import Task
+from task_manager.statuses.models import Status
 
 User = get_user_model()
 
 
 class UsersTest(TestCase):
     "Test Users app."
-    fixtures = ['users.json', 'tasks.json']
+    fixtures = ['users.json', 'statuses.json', 'tasks.json']
 
     def setUp(self):  # sorta __init__(self): ...
         "Set up users."
         self.user1 = User.objects.get(pk=1)
         self.user2 = User.objects.get(pk=2)
+        self.user3 = User.objects.get(pk=3)
+        self.status1 = Status.objects.get(pk=1)
+        self.status2 = Status.objects.get(pk=2)
         self.task1 = Task.objects.get(pk=1)
         self.task2 = Task.objects.get(pk=2)
+        self.task3 = Task.objects.get(pk=4)
 
 
     def test_users_list(self):
@@ -24,16 +29,19 @@ class UsersTest(TestCase):
         # Issue a GET request.
         response = self.client.get(reverse('users:list'))
         users_list = list(response.context["users"])
-        user1, user2 = users_list
+        user1, user2, user3 = users_list
         # Checking whether the response is 200 OK.
         self.assertEqual(response.status_code, 200)
         # Checking whether the user info is correct
         self.assertEqual(user1.username, 'jsmith')
-        self.assertEqual(user1.first_name, 'john')
+        self.assertEqual(user1.first_name, 'John')
         self.assertEqual(user1.last_name, 'Smith')
         self.assertEqual(user2.username, 'janedoe')
         self.assertEqual(user2.first_name, 'Jane')
         self.assertEqual(user2.last_name, 'Doe')
+        self.assertEqual(user3.username, 'qwerty')
+        self.assertEqual(user3.first_name, 'qwerty')
+        self.assertEqual(user3.last_name, 'qwerty')
 
 
     def test_create_user(self):
@@ -116,8 +124,13 @@ class UsersTest(TestCase):
 
     def test_delete_user_with_tasks(self):
         "Test delete user with a task."
-        user = self.user1  # creator of task2
-        response = self.client.post(reverse('users:delete', args=(user.id,)))
+        user = self.user2  # creator of task2
+        self.client.force_login(user)
+#        self.client.force_login(User.objects.get(pk=user.id))
+        response = self.client.post(
+            reverse('users:delete', args=(user.id,)),
+            follow=True,
+        )
         self.assertTrue(User.objects.filter(pk=user.id).exists())
         self.assertRedirects(response, '/users/')
         self.assertContains(
@@ -128,10 +141,10 @@ class UsersTest(TestCase):
 
     def test_delete_user(self):
         "Test delete user."
-        self.task1.delete()  # user1: creator
-        self.task2.delete()  # user1: creator, executive
+        Task.objects.all().delete()
+        Status.objects.all().delete()
         user = self.user1
-        self.client.force_login(User.objects.get(pk=user.id))
+        self.client.force_login(user)
         response = self.client.get(reverse('users:delete', args=(user.id,)))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(

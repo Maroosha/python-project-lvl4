@@ -2,27 +2,31 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import redirect
-from django.views.generic import CreateView, DeleteView, ListView, UpdateView
+from django.views.generic import CreateView, DeleteView, UpdateView
+from django_filters.views import FilterView
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy
 from django.contrib.auth import get_user_model
 from .models import Task
+from .filters import FilterTasks
 from .forms import TaskForm
 
 User = get_user_model()
 
 
-class TaskList(LoginRequiredMixin, ListView):
+class TaskList(LoginRequiredMixin, FilterView):
     "Show the list of tasks."
     model = Task
     template_name = 'tasks.html'
     context_object_name = 'tasks'
+    filterset_class = FilterTasks
 
 
     def get_context_data(self, **kwargs):
-        "Define the title."
+        "Define the title and button text."
         context = super().get_context_data(**kwargs)
         context['title'] = gettext_lazy('Tasks')
+        context['button_text'] = gettext_lazy('Show')
         return context
 
 

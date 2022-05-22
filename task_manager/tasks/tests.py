@@ -3,8 +3,6 @@ from django.contrib.auth import get_user_model
 from django.urls import reverse
 from django.utils.translation import gettext_lazy
 from .models import Task
-from task_manager.statuses.models import Status
-from task_manager.labels.models import Label
 
 User = get_user_model()
 
@@ -25,17 +23,10 @@ class TasksTests(TestCase):
         self.user2 = User.objects.get(pk=2)
         self.user3 = User.objects.get(pk=3)
 
-        self.status1 = Status.objects.get(pk=1)
-        self.status2 = Status.objects.get(pk=2)
-
         self.task1 = Task.objects.get(pk=1)
         self.task2 = Task.objects.get(pk=2)
         self.task3 = Task.objects.get(pk=4)
 
-        self.label1 = Label.objects.get(pk=1)
-        self.label2 = Label.objects.get(pk=2)
-        self.label3 = Label.objects.get(pk=3)
-        self.label4 = Label.objects.get(pk=4)
 
 
     def test_tasks_list(self):

@@ -14,12 +14,12 @@ class TaskForm(forms.ModelForm):
             'status',
             'created_by',
             'executive',
-            'labels',
+            'label',
         ]
-        labels = {
+        label = {
             'name': gettext_lazy('Name'),
             'description': gettext_lazy('Description'),
             'status': gettext_lazy('Status'),
             'executive': gettext_lazy('Executive'),
-            'labels': gettext_lazy('Labels'),
+            'label': gettext_lazy('Label'),
         }

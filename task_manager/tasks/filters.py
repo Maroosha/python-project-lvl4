@@ -1,4 +1,3 @@
-from random import choices
 import django_filters
 from django_filters.filters import ChoiceFilter, BooleanFilter
 from django.forms import CheckboxInput
@@ -34,7 +33,7 @@ class FilterTasks(django_filters.FilterSet):
         label=gettext_lazy('Label'),
         choices=all_labels,
     )
-    own_tasks = BooleanFilter(
+    own_task = BooleanFilter(
         label=gettext_lazy('my tasks only'),
         widget=CheckboxInput(),
         method='filter_own_tasks',
@@ -60,4 +59,4 @@ class FilterTasks(django_filters.FilterSet):
 
     class Meta:
         model = Task
-        fields = ['status', 'executive', 'labels']
+        fields = ['status', 'executive', 'label']

@@ -3,8 +3,8 @@ from django.contrib.auth import get_user_model
 from django.urls import reverse
 from django.utils.translation import gettext_lazy
 from .models import Task
-# from task_manager.statuses.models import Status
-# from task_manager.labels.models import Label
+from task_manager.statuses.models import Status
+from task_manager.labels.models import Label
 
 User = get_user_model()
 
@@ -15,8 +15,8 @@ class TasksTests(TestCase):
         'users.json',
         'statuses.json',
         'tasks.json',
-#        'tasklabelrelation.json',
-#        'labels.json',
+        'tasklabelrelation.json',
+        'labels.json',
     ]
     def setUp(self):
         "Set up statuses."
@@ -25,17 +25,17 @@ class TasksTests(TestCase):
         self.user2 = User.objects.get(pk=2)
         self.user3 = User.objects.get(pk=3)
 
-#        self.status1 = Status.objects.get(pk=1)
-#        self.status2 = Status.objects.get(pk=2)
+        self.status1 = Status.objects.get(pk=1)
+        self.status2 = Status.objects.get(pk=2)
 
         self.task1 = Task.objects.get(pk=1)
         self.task2 = Task.objects.get(pk=2)
         self.task3 = Task.objects.get(pk=4)
-#
-#        self.label1 = Label.objects.get(pk=1)
-#        self.label2 = Label.objects.get(pk=2)
-#        self.label3 = Label.objects.get(pk=3)
-#        self.label4 = Label.objects.get(pk=4)
+
+        self.label1 = Label.objects.get(pk=1)
+        self.label2 = Label.objects.get(pk=2)
+        self.label3 = Label.objects.get(pk=3)
+        self.label4 = Label.objects.get(pk=4)
 
 
     def test_tasks_list(self):
@@ -165,3 +165,39 @@ class TasksTests(TestCase):
             response,
             gettext_lazy('The task can only be deleted by its creator.'),
         )
+
+
+    def test_filter_by_status(self):
+        "Filter the tasks by status."
+        self.client.force_login(self.user1)
+        filtered_by_status = f'{reverse("tasks:list")}?status=2'
+        response = self.client.get(filtered_by_status)
+        self.assertEqual(response.status_code, 200)
+        self.assertQuerysetEqual(list(response.context['tasks']), [self.task3])
+
+
+    def test_filter_by_executive(self):
+        "Filter the tasks by executive."
+        self.client.force_login(self.user1)
+        filtered_by_executive = f'{reverse("tasks:list")}?executive=2'
+        response = self.client.get(filtered_by_executive)
+        self.assertEqual(response.status_code, 200)
+        self.assertQuerysetEqual(list(response.context['tasks']), [self.task1])
+
+
+    def test_filter_by_label(self):
+        "Filter the tasks by label."
+        self.client.force_login(self.user1)
+        filtered_by_label = f'{reverse("tasks:list")}?label=1'
+        response = self.client.get(filtered_by_label)
+        self.assertEqual(response.status_code, 200)
+        self.assertQuerysetEqual(list(response.context['tasks']), [self.task1])
+
+
+    def test_filter_by_own_tasks(self):
+        "Filter by own tasks."
+        self.client.force_login(self.user2)
+        filtered_by_own_tasks = f'{reverse("tasks:list")}?own_task=on'
+        response = self.client.get(filtered_by_own_tasks)
+        self.assertEqual(response.status_code, 200)
+        self.assertQuerysetEqual(list(response.context['tasks']), [self.task1, self.task2])

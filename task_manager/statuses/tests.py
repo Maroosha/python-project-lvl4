@@ -5,6 +5,19 @@ from django.utils.translation import gettext_lazy
 from faker import Faker
 from .models import Status
 from task_manager.tasks.models import Task
+from .constants import (
+    DELETE_TEMPLATE,
+    ERROR_STATUS_IN_USE,
+    FORM_TEMPLATE,
+    STATUS_CHANGED,
+    STATUS_CREATED,
+    STATUS_DELETED,
+    STATUSES_FIXTURE,
+    STATUS_LIST_TEMPLATE,
+    STATUS_NAME,
+    TASKS_FIXTURE,
+    USERS_FIXTURE,
+)
 
 User = get_user_model()
 
@@ -12,9 +25,9 @@ User = get_user_model()
 class StatusesTest(TestCase):
     "Test Statuses app."
     fixtures = [
-        'users.json',
-        'statuses.json',
-        'tasks.json',
+        USERS_FIXTURE,
+        STATUSES_FIXTURE,
+        TASKS_FIXTURE,
     ]
 
     def setUp(self):
@@ -35,7 +48,7 @@ class StatusesTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response,
-            template_name='statuses.html',
+            template_name=STATUS_LIST_TEMPLATE
         )
 
         statuses_list = list(response.context['statuses'])
@@ -53,13 +66,13 @@ class StatusesTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response,
-            template_name='form.html',
+            template_name=FORM_TEMPLATE,
         )
 
         Faker.seed(1)
         name = self.faker.word()
         new_status = {
-            'name': name,
+            STATUS_NAME: name,
         }
         response = self.client.post(
             reverse('statuses:create'),
@@ -70,7 +83,7 @@ class StatusesTest(TestCase):
         self.assertRedirects(response, '/statuses/', status_code=302)
         self.assertContains(
             response,
-            gettext_lazy('Status successfully created.'),
+            gettext_lazy(STATUS_CREATED),
         )
 
         status = Status.objects.get(name=new_status['name'])
@@ -85,13 +98,13 @@ class StatusesTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response,
-            template_name='form.html',
+            template_name=FORM_TEMPLATE,
         )
 
         Faker.seed(2)
         name = self.faker.word()
         changed_status = {
-            'name': name,
+            STATUS_NAME: name,
         }
         response = self.client.post(
             reverse('statuses:change', args=(status.id,)),
@@ -102,7 +115,7 @@ class StatusesTest(TestCase):
         self.assertRedirects(response, '/statuses/', status_code=302)
         self.assertContains(
             response,
-            gettext_lazy('Status successfully changed.'),
+            gettext_lazy(STATUS_CHANGED),
         )
         new_status = Status.objects.get(name=changed_status['name'])
         self.assertEqual(status.id, new_status.id)
@@ -118,7 +131,7 @@ class StatusesTest(TestCase):
         )
         self.assertTrue(User.objects.filter(pk=status.id).exists())
         self.assertRedirects(response, '/statuses/')
-        self.assertContains(response, gettext_lazy('Cannot delete a status in use.'))
+        self.assertContains(response, gettext_lazy(ERROR_STATUS_IN_USE))
 
 
     def test_delete_status(self):
@@ -131,7 +144,7 @@ class StatusesTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response,
-            template_name='delete.html',
+            template_name=DELETE_TEMPLATE,
         )
 
         response = self.client.post(
@@ -143,4 +156,4 @@ class StatusesTest(TestCase):
             Status.objects.get(pk=status.id)
         # Redirects and messages
         self.assertRedirects(response, '/statuses/', status_code=302)
-        self.assertContains(response, gettext_lazy('Status successfully deleted.'))
+        self.assertContains(response, gettext_lazy(STATUS_DELETED))

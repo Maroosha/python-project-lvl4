@@ -3,6 +3,25 @@ from django.contrib.auth import get_user_model
 from django.urls import reverse
 from django.utils.translation import gettext_lazy
 from .models import Task
+from .constants import (
+    DELETE_TEMPLATE,
+    DESCRIPTION,
+    CREATED_BY,
+    ERROR_DELETE_TASK_BY_NONCREATOR,
+    EXECUTIVE,
+    FORM_TEMPLATE,
+    LABELS_FIXTURE,
+    TASK_CHANGED,
+    TASK_CREATED,
+    TASK_DELETED,
+    STATUS,
+    STATUSES_FIXTURE,
+    TASK_LIST_TEMPLATE,
+    NAME,
+    TASKS_FIXTURE,
+    TASKLABELRELATION_FIXTURE,
+    USERS_FIXTURE,
+)
 
 User = get_user_model()
 
@@ -10,11 +29,11 @@ User = get_user_model()
 class TasksTests(TestCase):
     "Test tasks."
     fixtures = [
-        'users.json',
-        'statuses.json',
-        'tasks.json',
-        'tasklabelrelation.json',
-        'labels.json',
+        USERS_FIXTURE,
+        STATUSES_FIXTURE,
+        TASKS_FIXTURE,
+        TASKLABELRELATION_FIXTURE,
+        LABELS_FIXTURE,
     ]
     def setUp(self):
         "Set up statuses."
@@ -36,7 +55,7 @@ class TasksTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response,
-            template_name='tasks.html',
+            template_name=TASK_LIST_TEMPLATE,
         )
 
         tasks_list = list(response.context['tasks'])
@@ -53,15 +72,15 @@ class TasksTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response,
-            template_name='form.html',
+            template_name=FORM_TEMPLATE,
         )
 
         new_task = {
-            'name': 'new task',
-            'description': 'bla bla',
-            'status': 2,
-            'created_by': 1,
-            'executive': 3,
+            NAME: 'new task',
+            DESCRIPTION: 'bla bla',
+            STATUS: 2,
+            CREATED_BY: 1,
+            EXECUTIVE: 3,
         }
         response = self.client.post(
             reverse('tasks:create'),
@@ -72,7 +91,7 @@ class TasksTests(TestCase):
         self.assertRedirects(response, '/tasks/', status_code=302)
         self.assertContains(
             response,
-            gettext_lazy('Task successfully created.'),
+            gettext_lazy(TASK_CREATED),
         )
 
         task = Task.objects.get(name=new_task['name'])
@@ -88,15 +107,15 @@ class TasksTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response,
-            template_name='form.html',
+            template_name=FORM_TEMPLATE,
         )
 
         changed_task = {
-            'name': 'updated task',
-            'description': 'bla bla bla',
-            'status': 1,
-            'created_by': 1,
-            'executive': 1,
+            NAME: 'updated task',
+            DESCRIPTION: 'bla bla bla',
+            STATUS: 1,
+            CREATED_BY: 1,
+            EXECUTIVE: 1,
         }
         response = self.client.post(
             reverse('tasks:change', args=(task.id,)),
@@ -107,7 +126,7 @@ class TasksTests(TestCase):
         self.assertRedirects(response, '/tasks/', status_code=302)
         self.assertContains(
             response,
-            gettext_lazy('Task successfully changed.'),
+            gettext_lazy(TASK_CHANGED),
         )
         new_task = Task.objects.get(name=changed_task['name'])
         self.assertEqual(task.id, new_task.id)
@@ -121,7 +140,7 @@ class TasksTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response,
-            template_name='delete.html',
+            template_name=DELETE_TEMPLATE,
         )
 
         response = self.client.post(
@@ -132,7 +151,7 @@ class TasksTests(TestCase):
         with self.assertRaises(Task.DoesNotExist):
             Task.objects.get(pk=task.id)
         self.assertRedirects(response, '/tasks/', status_code=302)
-        self.assertContains(response, gettext_lazy('Task successfully deleted.'))
+        self.assertContains(response, gettext_lazy(TASK_DELETED))
 
 
     def test_delete_task_by_non_creator(self):
@@ -143,7 +162,7 @@ class TasksTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response,
-            template_name='delete.html',
+            template_name=DELETE_TEMPLATE,
         )
 
         response = self.client.post(
@@ -154,7 +173,7 @@ class TasksTests(TestCase):
         self.assertRedirects(response, '/tasks/')
         self.assertContains(
             response,
-            gettext_lazy('The task can only be deleted by its creator.'),
+            gettext_lazy(ERROR_DELETE_TASK_BY_NONCREATOR),
         )
 
 

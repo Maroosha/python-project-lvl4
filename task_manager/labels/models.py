@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy
+from .constants import LABEL_CREATED_AT, LABEL_NAME
 
 
 class Label(models.Model):
@@ -7,11 +8,11 @@ class Label(models.Model):
     name = models.CharField(
         max_length=100,
         null=False,
-        verbose_name=gettext_lazy('Name'),
+        verbose_name=gettext_lazy(LABEL_NAME),
     )
     created_at = models.DateTimeField(
         auto_now_add=True,
-        verbose_name=gettext_lazy('Created at'),
+        verbose_name=gettext_lazy(LABEL_CREATED_AT),
     )
     modified_at = models.DateTimeField(auto_now=True)
 

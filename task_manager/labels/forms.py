@@ -1,5 +1,6 @@
 from django import forms
 from .models import Label
+from .constants import NAME
 
 
 class LabelForm(forms.ModelForm):
@@ -8,5 +9,5 @@ class LabelForm(forms.ModelForm):
         'Label details.'
         model = Label
         fields = [
-            'name',
+            NAME,
         ]

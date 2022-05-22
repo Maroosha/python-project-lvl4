@@ -1,4 +1,3 @@
-from cProfile import label
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.urls import reverse
@@ -6,6 +5,21 @@ from django.utils.translation import gettext_lazy
 from task_manager.statuses.models import Status
 from task_manager.tasks.models import Task
 from .models import Label
+from .constants import (
+    DELETE_TEMPLATE,
+    ERROR_LABEL_IN_USE,
+    FORM_TEMPLATE,
+    LABEL_CHANGED,
+    LABEL_CREATED,
+    LABEL_DELETED,
+    LABEL_LIST_TEMPLATE,
+    LABELS_FIXTURE,
+    STATUSES_FIXTURE,
+    NAME,
+    TASKS_FIXTURE,
+    TASKLABELRELATION_FIXTURE,
+    USERS_FIXTURE,
+)
 
 User = get_user_model()
 
@@ -13,11 +27,11 @@ User = get_user_model()
 class LabelsTests(TestCase):
     "Test tasks."
     fixtures = [
-        'users.json',
-        'statuses.json',
-        'tasks.json',
-        'tasklabelrelation.json',
-        'labels.json',
+        USERS_FIXTURE,
+        STATUSES_FIXTURE,
+        TASKS_FIXTURE,
+        TASKLABELRELATION_FIXTURE,
+        LABELS_FIXTURE,
     ]
     def setUp(self):
         "Set up statuses."
@@ -45,7 +59,7 @@ class LabelsTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response,
-            template_name='labels.html',
+            template_name=LABEL_LIST_TEMPLATE,
         )
 
         tasks_list = list(response.context['labels'])
@@ -62,11 +76,11 @@ class LabelsTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response,
-            template_name='form.html',
+            template_name=FORM_TEMPLATE,
         )
 
         new_label = {
-            'name': 'new label',
+            NAME: 'new label',
         }
         response = self.client.post(
             reverse('labels:create'),
@@ -77,7 +91,7 @@ class LabelsTests(TestCase):
         self.assertRedirects(response, '/labels/', status_code=302)
         self.assertContains(
             response,
-            gettext_lazy('Label successfully created.'),
+            gettext_lazy(LABEL_CREATED),
         )
 
         lbl = Label.objects.get(name=new_label['name'])
@@ -92,11 +106,11 @@ class LabelsTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response,
-            template_name='form.html',
+            template_name=FORM_TEMPLATE,
         )
 
         changed_label = {
-            'name': 'changed lbl',
+            NAME: 'changed lbl',
         }
         response = self.client.post(
             reverse('labels:change', args=(label_.id,)),
@@ -107,7 +121,7 @@ class LabelsTests(TestCase):
         self.assertRedirects(response, '/labels/', status_code=302)
         self.assertContains(
             response,
-            gettext_lazy('Label successfully changed.'),
+            gettext_lazy(LABEL_CHANGED),
         )
         new_label = Label.objects.get(name=changed_label['name'])
         self.assertEqual(label_.id, new_label.id)
@@ -125,7 +139,7 @@ class LabelsTests(TestCase):
         self.assertRedirects(response, '/labels/')
         self.assertContains(
             response,
-            gettext_lazy('Cannot delete a label in use.'),
+            gettext_lazy(ERROR_LABEL_IN_USE),
         )
 
 
@@ -139,7 +153,7 @@ class LabelsTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response,
-            template_name='delete.html',
+            template_name=DELETE_TEMPLATE,
         )
 
         response = self.client.post(
@@ -150,4 +164,4 @@ class LabelsTests(TestCase):
         with self.assertRaises(Label.DoesNotExist):
             Label.objects.get(pk=label_.id)
         self.assertRedirects(response, '/labels/', status_code=302)
-        self.assertContains(response, gettext_lazy('Label successfully deleted.'))
+        self.assertContains(response, gettext_lazy(LABEL_DELETED))

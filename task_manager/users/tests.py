@@ -4,6 +4,20 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy
 from task_manager.tasks.models import Task
 from task_manager.statuses.models import Status
+from .constants import (
+    DELETE_TEMPLATE,
+    ERROR_USER_IN_USE,
+    FIRST_NAME,
+    FORM_TEMPLATE,
+    LAST_NAME,
+    PASSWORD1,
+    PASSWORD2,
+    USER_CHANGED,
+    USER_CREATED,
+    USER_DELETED,
+    USER_LIST_TEMPLATE,
+    USERNAME,
+)
 
 User = get_user_model()
 
@@ -28,7 +42,11 @@ class UsersTest(TestCase):
         "Test users list."
         # Issue a GET request.
         response = self.client.get(reverse('users:list'))
-        users_list = list(response.context["users"])
+        self.assertTemplateUsed(  # check the template used
+            response,
+            template_name=USER_LIST_TEMPLATE,
+        )
+        users_list = list(response.context['users'])
         user1, user2, user3 = users_list
         # Checking whether the response is 200 OK.
         self.assertEqual(response.status_code, 200)
@@ -51,16 +69,16 @@ class UsersTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(  # check the template used
             response,
-            template_name='form.html',
+            template_name=FORM_TEMPLATE,
         )
 
         # Create a new user
         new_user = {
-            'first_name': 'Thorin',
-            'last_name': 'Oakenshield',
-            'username': 'th.oakenshield',
-            'password1': 'qwerty',
-            'password2': 'qwerty',
+            FIRST_NAME: 'Thorin',
+            LAST_NAME: 'Oakenshield',
+            USERNAME: 'th.oakenshield',
+            PASSWORD1: 'qwerty',
+            PASSWORD2: 'qwerty',
         }
         response = self.client.post(
             reverse('users:create'),
@@ -72,7 +90,7 @@ class UsersTest(TestCase):
         self.assertRedirects(response, '/login/', status_code=302)
         self.assertContains(
             response,
-            gettext_lazy('User successfully created.'),
+            gettext_lazy(USER_CREATED),
         )
         # Check user details
         new_user = User.objects.get(username=new_user['username'])
@@ -92,16 +110,16 @@ class UsersTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response,
-            template_name='form.html',
+            template_name=FORM_TEMPLATE,
         )
 
         # introducing changes
         changed_user = {
-            'first_name': 'Mr.',
-            'last_name': 'Underhill',
-            'username': 'funderhill',
-            'password1': 'q1w2e3r4',
-            'password2': 'q1w2e3r4',
+            FIRST_NAME: 'Mr.',
+            LAST_NAME: 'Underhill',
+            USERNAME: 'funderhill',
+            PASSWORD1: 'q1w2e3r4',
+            PASSWORD2: 'q1w2e3r4',
         }
         response = self.client.post(
             reverse('users:change', args=(user.id,)),
@@ -113,7 +131,7 @@ class UsersTest(TestCase):
         self.assertRedirects(response, '/users/', status_code=302)
         self.assertContains(
             response,
-            gettext_lazy('User successfully changed.'),
+            gettext_lazy(USER_CHANGED),
         )
         # Check user details
         new_user = User.objects.get(username=changed_user['username'])
@@ -135,7 +153,7 @@ class UsersTest(TestCase):
         self.assertRedirects(response, '/users/')
         self.assertContains(
             response,
-            gettext_lazy('Cannot delete a user in use.'),
+            gettext_lazy(ERROR_USER_IN_USE),
         )
 
 
@@ -149,7 +167,7 @@ class UsersTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response,
-            template_name='delete.html',
+            template_name=DELETE_TEMPLATE,
         )
 
         # deleting a user (user1)
@@ -163,4 +181,4 @@ class UsersTest(TestCase):
             User.objects.get(pk=user.id)
         # Redirects and messages
         self.assertRedirects(response, '/users/', status_code=302)
-        self.assertContains(response, gettext_lazy('User successfully deleted.'))
+        self.assertContains(response, gettext_lazy(USER_DELETED))

@@ -9,15 +9,33 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy
 from .forms import CreateUserForm
 from django.contrib.auth import get_user_model
+from .constants import (
+    BUTTON_NAME_TITLE,
+    BUTTON_TEXT,
+    CANT_CHANGE_ANOTHER_USER,
+    CHANGE_BUTTON,
+    CHANGE_USER_TITLE,
+    CREATE_USER_TITLE,
+    DELETE_BUTTON,
+    DELETE_TEMPLATE,
+    DELETE_USER_TITLE,
+    ERROR_USER_IN_USE,
+    FORM_TEMPLATE,
+    REGISTER_BUTTON,
+    USER_CHANGED,
+    USER_CREATED,
+    USER_DELETED,
+    USER_LIST_TEMPLATE,
+    USER_LIST_TITLE,
+)
 
 
 User = get_user_model()
 
 
 class EditUserMixin(AccessMixin):
-    "Edit an account."
-    error_message = gettext_lazy('You do not have a permission to \
-change another user.')
+    "Edit a user."
+    error_message = gettext_lazy(CANT_CHANGE_ANOTHER_USER)
     success_url = reverse_lazy('users:list')
 
 
@@ -30,8 +48,8 @@ change another user.')
 
 
 class UserList(ListView):
-    '.'
-    template_name = 'users.html'
+    "Show the list of users."
+    template_name = USER_LIST_TEMPLATE
     model = User
     context_object_name = 'users'
 
@@ -39,24 +57,24 @@ class UserList(ListView):
     def get_context_data(self, **kwargs):
         '.'
         context = super().get_context_data(**kwargs)
-        context['title'] = gettext_lazy('Users')
+        context[BUTTON_NAME_TITLE] = gettext_lazy(USER_LIST_TITLE)
         return context
 
 
 class CreateUser(SuccessMessageMixin, CreateView):
-    '.'
+    "Create a user."
     model = User
-    template_name = 'form.html'
+    template_name = FORM_TEMPLATE
     form_class = CreateUserForm
     success_url = reverse_lazy('login')
-    success_message = gettext_lazy('User successfully created.')
+    success_message = gettext_lazy(USER_CREATED)
 
 
     def get_context_data(self, **kwargs):
-        '.'
+        "Define the title ad the button."
         context = super().get_context_data(**kwargs)
-        context['title'] = gettext_lazy('Create a user')
-        context['button_text'] = gettext_lazy('Register')
+        context[BUTTON_NAME_TITLE] = gettext_lazy(CREATE_USER_TITLE)
+        context[BUTTON_TEXT] = gettext_lazy(REGISTER_BUTTON)
         return context
 
 
@@ -66,19 +84,19 @@ class ChangeUser(
     SuccessMessageMixin,
     UpdateView,
 ):
-    '.'
+    "Change a user."
     model = User
-    template_name = 'form.html'
+    template_name = FORM_TEMPLATE
     form_class = CreateUserForm
     success_url = reverse_lazy('users:list')
-    success_message = gettext_lazy('User successfully changed.')
+    success_message = gettext_lazy(USER_CHANGED)
 
 
     def get_context_data(self, **kwargs):
-        '.'
+        "Define the title ad the button."
         context = super().get_context_data(**kwargs)
-        context['title'] = gettext_lazy('Change a user')
-        context['button_text'] = gettext_lazy('Change')
+        context[BUTTON_NAME_TITLE] = gettext_lazy(CHANGE_USER_TITLE)
+        context[BUTTON_TEXT] = gettext_lazy(CHANGE_BUTTON)
         return context
 
 
@@ -88,18 +106,19 @@ class DeleteUser(
     EditUserMixin,
     DeleteView,
 ):
-    '.'
+    "Delete a user."
     model = User
-    template_name = 'delete.html'
+    template_name = DELETE_TEMPLATE
     success_url = reverse_lazy('users:list')
-    success_message = gettext_lazy('User successfully deleted.')
+    success_message = gettext_lazy(USER_DELETED)
+    error_message = gettext_lazy(ERROR_USER_IN_USE)
 
 
     def get_context_data(self, **kwargs):
-        '.'
+        "Define the title ad the button."
         context = super().get_context_data(**kwargs)
-        context['title'] = gettext_lazy('Delete a user')
-        context['button_text'] = gettext_lazy('Delete')
+        context[BUTTON_NAME_TITLE] = gettext_lazy(DELETE_USER_TITLE)
+        context[BUTTON_TEXT] = gettext_lazy(DELETE_BUTTON)
         return context
 
 
@@ -108,8 +127,7 @@ class DeleteUser(
         try:
             self.object.delete()
         except ProtectedError:
-            error_user_in_use = 'Cannot delete a user in use.'
-            messages.error(self.request, error_user_in_use)
+            messages.error(self.request, self.error_message)
         else:
             messages.success(self.request, self.success_message)
         return HttpResponseRedirect(self.success_url)

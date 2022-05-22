@@ -1,5 +1,6 @@
 from django import forms
 from .models import Status
+from .constants import STATUS_NAME
 
 
 class StatusForm(forms.ModelForm):
@@ -8,5 +9,5 @@ class StatusForm(forms.ModelForm):
         'Status details.'
         model = Status
         fields = [
-            'name',
+            STATUS_NAME,
         ]

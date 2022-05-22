@@ -10,6 +10,25 @@ from django.contrib.auth import get_user_model
 from .models import Task
 from .filters import FilterTasks
 from .forms import TaskForm
+from .constants import (
+    BUTTON_NAME_TITLE,
+    BUTTON_TEXT,
+    CHANGE_BUTTON,
+    CREATE_BUTTON,
+    CHANGE_TASK_TITLE,
+    CREATE_TASK_TITLE,
+    DELETE_BUTTON,
+    DELETE_TEMPLATE,
+    DELETE_TASK_TITLE,
+    ERROR_DELETE_TASK_BY_NONCREATOR,
+    FORM_TEMPLATE,
+    SHOW_BUTTON,
+    TASK_CHANGED,
+    TASK_CREATED,
+    TASK_DELETED,
+    TASK_LIST_TEMPLATE,
+    TASK_LIST_TITLE,
+)
 
 User = get_user_model()
 
@@ -17,7 +36,7 @@ User = get_user_model()
 class TaskList(LoginRequiredMixin, FilterView):
     "Show the list of tasks."
     model = Task
-    template_name = 'tasks.html'
+    template_name = TASK_LIST_TEMPLATE
     context_object_name = 'tasks'
     filterset_class = FilterTasks
 
@@ -25,8 +44,8 @@ class TaskList(LoginRequiredMixin, FilterView):
     def get_context_data(self, **kwargs):
         "Define the title and button text."
         context = super().get_context_data(**kwargs)
-        context['title'] = gettext_lazy('Tasks')
-        context['button_text'] = gettext_lazy('Show')
+        context[BUTTON_NAME_TITLE] = gettext_lazy(TASK_LIST_TITLE)
+        context[BUTTON_TEXT] = gettext_lazy(SHOW_BUTTON)
         return context
 
 
@@ -37,10 +56,10 @@ class CreateTask(
 ):
     "Create a new task."
     model = Task
-    template_name = 'form.html'
+    template_name = FORM_TEMPLATE
     form_class = TaskForm
     success_url = reverse_lazy('tasks:list')
-    success_message = gettext_lazy('Task successfully created.')
+    success_message = gettext_lazy(TASK_CREATED)
 
 
 # https://stackoverflow.com/questions/55092544/django-and-the-form-valid-method
@@ -59,8 +78,8 @@ class CreateTask(
     def get_context_data(self, **kwargs):
         "Define the title and the button."
         context = super().get_context_data(**kwargs)
-        context['title'] = gettext_lazy('Create a task')
-        context['button_text'] = gettext_lazy('Create')
+        context[BUTTON_NAME_TITLE] = gettext_lazy(CREATE_TASK_TITLE)
+        context[BUTTON_TEXT] = gettext_lazy(CREATE_BUTTON)
         return context
 
 
@@ -71,17 +90,17 @@ class ChangeTask(
 ):
     "Change a task."
     model = Task
-    template_name = 'form.html'
+    template_name = FORM_TEMPLATE
     form_class = TaskForm
     success_url = reverse_lazy('tasks:list')
-    success_message = gettext_lazy('Task successfully changed.')
+    success_message = gettext_lazy(TASK_CHANGED)
 
 
     def get_context_data(self, **kwargs):
         "Define title and button."
         context = super().get_context_data(**kwargs)
-        context['title'] = gettext_lazy('Change a task')
-        context['button_text'] = gettext_lazy('Change')
+        context[BUTTON_NAME_TITLE] = gettext_lazy(CHANGE_TASK_TITLE)
+        context[BUTTON_TEXT] = gettext_lazy(CHANGE_BUTTON)
         return context
 
 
@@ -92,15 +111,15 @@ class DeleteTask(
 ):
     "Delete a task."
     model = Task
-    template_name = 'delete.html'
+    template_name = DELETE_TEMPLATE
     success_url = reverse_lazy('tasks:list')
-    success_message = gettext_lazy('Task successfully deleted.')
+    success_message = gettext_lazy(TASK_DELETED)
 
 
 # https://stackoverflow.com/questions/55092544/django-and-the-form-valid-method
     def form_valid(self, form):
         "Check if the user is an author of a task."
-        error_message = gettext_lazy('The task can only be deleted by its creator.')
+        error_message = gettext_lazy(ERROR_DELETE_TASK_BY_NONCREATOR)
         if self.get_object().created_by != self.request.user:
             messages.error(self.request, error_message)
         else:
@@ -111,6 +130,6 @@ class DeleteTask(
     def get_context_data(self, **kwargs):
         "Define the title and the button."
         context = super().get_context_data(**kwargs)
-        context['title'] = gettext_lazy('Delete a task')
-        context['button_text'] = gettext_lazy('Delete')
+        context[BUTTON_NAME_TITLE] = gettext_lazy(DELETE_TASK_TITLE)
+        context[BUTTON_TEXT] = gettext_lazy(DELETE_BUTTON)
         return context

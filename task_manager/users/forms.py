@@ -1,5 +1,13 @@
+from multiprocessing.spawn import import_main_path
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
+from .constants import (
+    FIRST_NAME,
+    LAST_NAME,
+    PASSWORD1,
+    PASSWORD2,
+    USERNAME,
+)
 
 
 class CreateUserForm(UserCreationForm):
@@ -9,9 +17,9 @@ class CreateUserForm(UserCreationForm):
         User = get_user_model()
         model = User
         fields = [
-            'first_name',
-            'last_name',
-            'username',
-            'password1',
-            'password2',
+            FIRST_NAME,
+            LAST_NAME,
+            USERNAME,
+            PASSWORD1,
+            PASSWORD2,
         ]

@@ -9,19 +9,37 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy
 from .models import Label
 from .forms import LabelForm
+from .constants import (
+    BUTTON_NAME_TITLE,
+    BUTTON_TEXT,
+    CHANGE_BUTTON,
+    CREATE_BUTTON,
+    CHANGE_LABEL_TITLE,
+    CREATE_LABEL_TITLE,
+    DELETE_BUTTON,
+    DELETE_TEMPLATE,
+    DELETE_LABEL_TITLE,
+    ERROR_LABEL_IN_USE,
+    FORM_TEMPLATE,
+    LABEL_CHANGED,
+    LABEL_CREATED,
+    LABEL_DELETED,
+    LABEL_LIST_TEMPLATE,
+    LABEL_LIST_TITLE,
+)
 
 
 class LabelList(LoginRequiredMixin, ListView):
     "Show the list of labels."
     model = Label
-    template_name = 'labels.html'
+    template_name = LABEL_LIST_TEMPLATE
     context_object_name = 'labels'
 
 
     def get_context_data(self, **kwargs):
         "Define the title."
         context = super().get_context_data(**kwargs)
-        context['title'] = gettext_lazy('Label')
+        context[BUTTON_NAME_TITLE] = gettext_lazy(LABEL_LIST_TITLE)
         return context
 
 
@@ -32,17 +50,17 @@ class CreateLabel(
 ):
     "Create a label."
     model = Label
-    template_name = 'form.html'
+    template_name = FORM_TEMPLATE
     form_class = LabelForm
     success_url = reverse_lazy('labels:list')
-    success_message = gettext_lazy('Label successfully created.')
+    success_message = gettext_lazy(LABEL_CREATED)
 
 
     def get_context_data(self, **kwargs):
         "Define the title and the button."
         context = super().get_context_data(**kwargs)
-        context['title'] = gettext_lazy('Create a Label')
-        context['button_text'] = gettext_lazy('Create')
+        context[BUTTON_NAME_TITLE] = gettext_lazy(CREATE_LABEL_TITLE)
+        context[BUTTON_TEXT] = gettext_lazy(CREATE_BUTTON)
         return context
 
 
@@ -53,17 +71,17 @@ class ChangeLabel(
 ):
     "Change a label."
     model = Label
-    template_name = 'form.html'
+    template_name = FORM_TEMPLATE
     form_class = LabelForm
     success_url = reverse_lazy('labels:list')
-    success_message = gettext_lazy('Label successfully changed.')
+    success_message = gettext_lazy(LABEL_CHANGED)
 
 
     def get_context_data(self, **kwargs):
         "Define the title and the button."
         context = super().get_context_data(**kwargs)
-        context['title'] = gettext_lazy('Change a label')
-        context['button_text'] = gettext_lazy('Change')
+        context[BUTTON_NAME_TITLE] = gettext_lazy(CHANGE_LABEL_TITLE)
+        context[BUTTON_TEXT] = gettext_lazy(CHANGE_BUTTON)
         return context
 
 
@@ -74,10 +92,10 @@ class Deletelabel(
 ):
     "Delete a label."
     model = Label
-    template_name = 'delete.html'
+    template_name = DELETE_TEMPLATE
     success_url = reverse_lazy('labels:list')
-    success_message = gettext_lazy('Label successfully deleted.')
-    error_message = 'Cannot delete a label in use.'
+    success_message = gettext_lazy(LABEL_DELETED)
+    error_message = gettext_lazy(ERROR_LABEL_IN_USE)
 
 
     def form_valid(self, form):
@@ -94,6 +112,6 @@ class Deletelabel(
     def get_context_data(self, **kwargs):
         "Define the title and the button."
         context = super().get_context_data(**kwargs)
-        context['title'] = gettext_lazy('Delete a label')
-        context['button_text'] = gettext_lazy('Delete')
+        context[BUTTON_NAME_TITLE] = gettext_lazy(DELETE_LABEL_TITLE)
+        context[BUTTON_TEXT] = gettext_lazy(DELETE_BUTTON)
         return context

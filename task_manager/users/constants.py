@@ -16,6 +16,7 @@ USERNAME = 'username'
 
 # Messages
 CANT_CHANGE_ANOTHER_USER = 'You do not have a permission to change another user'
+LOGIN_REQUIRED = 'You are not authorized. Please, log in.'
 USER_CREATED = 'User successfully created'
 USER_CHANGED = 'User successfully changed'
 USER_DELETED = 'User successfully deleted'

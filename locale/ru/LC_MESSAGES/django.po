@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-22 16:03+0100\n"
+"POT-Creation-Date: 2022-05-23 14:17+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -75,18 +75,6 @@ msgstr "Пользователь"
 msgid "Users"
 msgstr "Пользователи"
 
-#: task_manager/views.py:16
-msgid "Logged in successfully."
-msgstr "Вы залогинены"
-
-#: task_manager/views.py:22 task_manager/views.py:23 templates/base.html:47
-msgid "Log in"
-msgstr "Войти"
-
-#: task_manager/views.py:34
-msgid "Logged out successfully."
-msgstr "Вы разлогинены"
-
 #: templates/base.html:14 templates/base.html:19
 msgid "Task manager"
 msgstr "Менеджер задач"
@@ -97,8 +85,12 @@ msgstr "Менеджер задач"
 msgid "Log out"
 msgstr "Выход"
 
+#: templates/base.html:47
+msgid "Log in"
+msgstr "Войти"
+
 #: templates/base.html:50
-msgid "Register"
+msgid "Sign up"
 msgstr "Зарегистрироваться"
 
 #: templates/delete.html:13
@@ -162,6 +154,12 @@ msgstr "Полное имя"
 #: templates/users.html:18
 msgid "Creation date"
 msgstr "Дата создания"
+
+#~ msgid "Logged in successfully."
+#~ msgstr "Вы залогинены"
+
+#~ msgid "Logged out successfully."
+#~ msgstr "Вы разлогинены"
 
 #, fuzzy
 #~| msgid "User successfully created."

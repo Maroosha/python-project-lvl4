@@ -1,9 +1,9 @@
 from django.contrib import messages
-from django.contrib.auth.mixins import AccessMixin, LoginRequiredMixin
+# from django.contrib.auth.mixins import AccessMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import ProtectedError
 from django.http import HttpResponseRedirect
-from django.shortcuts import redirect
+# from django.shortcuts import redirect
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy
@@ -12,7 +12,6 @@ from django.contrib.auth import get_user_model
 from .constants import (
     BUTTON_NAME_TITLE,
     BUTTON_TEXT,
-    CANT_CHANGE_ANOTHER_USER,
     CHANGE_BUTTON,
     CHANGE_USER_TITLE,
     CREATE_USER_TITLE,
@@ -20,6 +19,7 @@ from .constants import (
     DELETE_TEMPLATE,
     DELETE_USER_TITLE,
     ERROR_USER_IN_USE,
+    LOGIN_REQUIRED,
     FORM_TEMPLATE,
     REGISTER_BUTTON,
     USER_CHANGED,
@@ -28,23 +28,12 @@ from .constants import (
     USER_LIST_TEMPLATE,
     USER_LIST_TITLE,
 )
-
+from .custom_mixins import (
+    EditUserCustomMixin,
+    LoginRequiredCustomMixin,
+)
 
 User = get_user_model()
-
-
-class EditUserMixin(AccessMixin):
-    "Edit a user."
-    error_message = gettext_lazy(CANT_CHANGE_ANOTHER_USER)
-    success_url = reverse_lazy('users:list')
-
-
-    def dispatch(self, request, *args, **kwargs):
-        "Check if the user can edit/delete the given account."
-        if kwargs['pk'] != self.request.user.id:
-            messages.error(self.request, self.error_message)
-            return redirect(self.success_url)
-        return super().dispatch(request, *args, **kwargs)
 
 
 class UserList(ListView):
@@ -79,8 +68,8 @@ class CreateUser(SuccessMessageMixin, CreateView):
 
 
 class ChangeUser(
-    LoginRequiredMixin,
-    EditUserMixin,
+    LoginRequiredCustomMixin,
+    EditUserCustomMixin,
     SuccessMessageMixin,
     UpdateView,
 ):
@@ -101,9 +90,9 @@ class ChangeUser(
 
 
 class DeleteUser(
-    LoginRequiredMixin,
+    LoginRequiredCustomMixin,
     SuccessMessageMixin,
-    EditUserMixin,
+    EditUserCustomMixin,
     DeleteView,
 ):
     "Delete a user."

@@ -127,7 +127,7 @@ class LabelsTests(TestCase):
         self.assertEqual(label_.id, new_label.id)
 
 
-    def test_delete_label_with_task(self):  # WON'T WORK
+    def test_delete_label_with_task(self):
         "Test deleting a label with a task assigned to it."
         self.client.force_login(self.user2)
         label_ = self.label4

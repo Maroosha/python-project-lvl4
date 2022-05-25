@@ -25,9 +25,8 @@ class Login(SuccessMessageMixin, LoginView):
     template_name = FORM_TEMPLATE
     success_message = LOGGED_IN
 
-
     def get_context_data(self, **kwargs):
-        '.'
+        "Set up buttons."
         context = super().get_context_data(**kwargs)
         context[BUTTON_NAME_TITLE] = LOG_IN_TITLE
         context[BUTTON_TEXT] = LOG_IN_TITLE
@@ -37,7 +36,6 @@ class Login(SuccessMessageMixin, LoginView):
 
 class Logout(SuccessMessageMixin, LogoutView):
     "Log out from Task Manager."
-
 
     def dispatch(self, request, *args, **kwargs):
         "Log out and show a logout message."

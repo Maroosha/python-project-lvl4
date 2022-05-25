@@ -38,7 +38,6 @@ class UserList(ListView):
     model = User
     context_object_name = 'users'
 
-
     def get_context_data(self, **kwargs):
         '.'
         context = super().get_context_data(**kwargs)
@@ -54,9 +53,8 @@ class CreateUser(SuccessMessageMixin, CreateView):
     success_url = reverse_lazy('login')
     success_message = USER_CREATED
 
-
     def get_context_data(self, **kwargs):
-        "Define the title ad the button."
+        "Set up the title ad the button."
         context = super().get_context_data(**kwargs)
         context[BUTTON_NAME_TITLE] = CREATE_USER_TITLE
         context[BUTTON_TEXT] = REGISTER_BUTTON
@@ -76,9 +74,8 @@ class ChangeUser(
     success_url = reverse_lazy('users:list')
     success_message = USER_CHANGED
 
-
     def get_context_data(self, **kwargs):
-        "Define the title ad the button."
+        "Set up the title ad the button."
         context = super().get_context_data(**kwargs)
         context[BUTTON_NAME_TITLE] = CHANGE_USER_TITLE
         context[BUTTON_TEXT] = CHANGE_BUTTON
@@ -98,14 +95,12 @@ class DeleteUser(
     success_message = USER_DELETED
     error_message = ERROR_USER_IN_USE
 
-
     def get_context_data(self, **kwargs):
-        "Define the title ad the button."
+        "Set up the title ad the button."
         context = super().get_context_data(**kwargs)
         context[BUTTON_NAME_TITLE] = DELETE_USER_TITLE
         context[BUTTON_TEXT] = DELETE_BUTTON
         return context
-
 
     def form_valid(self, form):
         "Check if any statuses or tasks are assigned to the given user."

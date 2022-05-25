@@ -45,7 +45,6 @@ class FilterTasks(django_filters.FilterSet):
         field_name='own_tasks',
     )
 
-
     def filter_own_tasks(self, queryset, name, value):
         """Filter own tasks.
 
@@ -60,7 +59,6 @@ class FilterTasks(django_filters.FilterSet):
         if value:
             queryset = queryset.filter(created_by=self.request.user)
         return queryset
-
 
     class Meta:
         model = Task

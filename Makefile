@@ -7,6 +7,9 @@ requirements:
 locale:
 	poetry run django-admin makemessages -l ru
 
+lint:
+	poetry run flake8 task_manager
+
 compile:
 	poetry run django-admin compilemessages --ignore=env
 
@@ -32,5 +35,8 @@ makemigrations_labels:
 
 test:
 	poetry run python3 manage.py test
+
+test-coverage:
+	poetry run pytest --cov=task_manager
 
 .PHONY: run test locale

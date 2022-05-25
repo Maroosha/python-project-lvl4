@@ -39,7 +39,6 @@ class StatusesTest(TestCase):
         self.task1 = Task.objects.get(pk=1)
         self.task2 = Task.objects.get(pk=2)
 
-
     def test_statuses_list(self):
         "Test list of statuses."
         self.client.force_login(self.user)
@@ -56,7 +55,6 @@ class StatusesTest(TestCase):
         self.assertEqual(status1.id, 1)
         self.assertEqual(status2.name, 'John Smith\'s status')
         self.assertEqual(status2.id, 2)
-
 
     def test_create_status(self):
         "Test create status."
@@ -88,12 +86,13 @@ class StatusesTest(TestCase):
         status = Status.objects.get(name=new_status['name'])
         self.assertEqual(3, status.id)
 
-
     def test_change_status(self):
         "Test change status."
         self.client.force_login(self.user)
         status = self.status1
-        response = self.client.get(reverse('statuses:change', args=(status.id,)))
+        response = self.client.get(
+            reverse('statuses:change', args=(status.id,)),
+        )
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response,
@@ -119,19 +118,17 @@ class StatusesTest(TestCase):
         new_status = Status.objects.get(name=changed_status['name'])
         self.assertEqual(status.id, new_status.id)
 
-
     def test_delete_status_with_tasks(self):
         "Test delete status with tasks."
         self.client.force_login(self.user)
         status = self.status1
         response = self.client.post(
-            reverse('statuses:delete', args = (status.id,)),
+            reverse('statuses:delete', args=(status.id,)),
             follow=True,
         )
         self.assertTrue(User.objects.filter(pk=status.id).exists())
         self.assertRedirects(response, '/statuses/')
         self.assertContains(response, ERROR_STATUS_IN_USE)
-
 
     def test_delete_status(self):
         "Test delete status."
@@ -139,7 +136,9 @@ class StatusesTest(TestCase):
         status = self.status1
         self.task1.delete()
         self.task2.delete()
-        response = self.client.get(reverse('statuses:delete', args=(status.id,)))
+        response = self.client.get(
+            reverse('statuses:delete', args=(status.id,)),
+        )
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response,

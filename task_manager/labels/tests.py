@@ -32,6 +32,7 @@ class LabelsTests(TestCase):
         TASKLABELRELATION_FIXTURE,
         LABELS_FIXTURE,
     ]
+
     def setUp(self):
         "Set up statuses."
         self.user1 = User.objects.get(pk=1)
@@ -50,7 +51,6 @@ class LabelsTests(TestCase):
         self.label3 = Label.objects.get(pk=3)
         self.label4 = Label.objects.get(pk=4)
 
-
     def test_labels_list(self):
         "Test list of labels page."
         self.client.force_login(self.user2)
@@ -66,7 +66,6 @@ class LabelsTests(TestCase):
             tasks_list,
             [self.label1, self.label2, self.label3, self.label4],
         )
-
 
     def test_create_label(self):
         "Test create a labels."
@@ -96,7 +95,6 @@ class LabelsTests(TestCase):
         lbl = Label.objects.get(name=new_label['name'])
         self.assertEqual(5, lbl.id)
 
-
     def test_update_label(self):
         "Test update a label."
         self.client.force_login(self.user3)
@@ -125,7 +123,6 @@ class LabelsTests(TestCase):
         new_label = Label.objects.get(name=changed_label['name'])
         self.assertEqual(label_.id, new_label.id)
 
-
     def test_delete_label_with_task(self):
         "Test deleting a label with a task assigned to it."
         self.client.force_login(self.user2)
@@ -140,7 +137,6 @@ class LabelsTests(TestCase):
             response,
             ERROR_LABEL_IN_USE,
         )
-
 
     def test_delete_label(self):
         "Test delete a label."

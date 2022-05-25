@@ -58,12 +58,10 @@ class Task(models.Model):
     )
     modified_at = models.DateTimeField(auto_now=True)
 
-
     def __str__(self):
         """Method: when retrieving an object, the name is returned
         instead of just generic non-human readable text."""
         return self.name
-
 
     class Meta:
         "Meta class."

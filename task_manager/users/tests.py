@@ -39,7 +39,6 @@ class UsersTest(TestCase):
         self.task2 = Task.objects.get(pk=2)
         self.task3 = Task.objects.get(pk=4)
 
-
     def test_users_list(self):
         "Test users list."
         # Issue a GET request.
@@ -63,13 +62,12 @@ class UsersTest(TestCase):
         self.assertEqual(user3.first_name, 'qwerty')
         self.assertEqual(user3.last_name, 'qwerty')
 
-
     def test_create_user(self):
         "Test create user."
         # Check response
         response = self.client.get(reverse('users:create'))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(  # check the template used
+        self.assertTemplateUsed(
             response,
             template_name=FORM_TEMPLATE,
         )
@@ -99,7 +97,6 @@ class UsersTest(TestCase):
         self.assertEqual('Thorin', new_user.first_name)
         self.assertEqual('Oakenshield', new_user.last_name)
         self.assertTrue(new_user.check_password('qwerty'))
-
 
     def test_change_user(self):
         "Test change user."
@@ -141,12 +138,10 @@ class UsersTest(TestCase):
         self.assertEqual('Underhill', new_user.last_name)
         self.assertTrue(new_user.check_password('q1w2e3r4'))
 
-
     def test_delete_user_with_tasks(self):
         "Test delete user with a task."
         user = self.user2  # creator of task2
         self.client.force_login(user)
-#        self.client.force_login(User.objects.get(pk=user.id))
         response = self.client.post(
             reverse('users:delete', args=(user.id,)),
             follow=True,
@@ -157,7 +152,6 @@ class UsersTest(TestCase):
             response,
             ERROR_USER_IN_USE,
         )
-
 
     def test_delete_user(self):
         "Test delete user."

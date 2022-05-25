@@ -12,14 +12,12 @@ from .constants import (
 
 class EditUserCustomMixin(AccessMixin):
     "Edit a user."
-    error_message = CANT_CHANGE_ANOTHER_USER
     success_url = reverse_lazy('users:list')
-
 
     def dispatch(self, request, *args, **kwargs):
         "Check if the user can edit/delete the given account."
         if kwargs['pk'] != self.request.user.id:
-            messages.error(self.request, self.error_message)
+            messages.error(self.request, CANT_CHANGE_ANOTHER_USER)
             return redirect(self.success_url)
         return super().dispatch(request, *args, **kwargs)
 
@@ -27,12 +25,11 @@ class EditUserCustomMixin(AccessMixin):
 class LoginRequiredCustomMixin(AccessMixin):
     """Custom mixin requiring authorized access.
     Shows custom message if not authorized."""
-    url = 'login'
-
+    error_url = 'login'
 
     def dispatch(self, request, *args, **kwargs):
         "Set the mixin."
         if not request.user.is_authenticated:
             messages.error(self.request, LOGIN_REQUIRED)
-            return redirect(self.url)
+            return redirect(self.error_url)
         return super().dispatch(request, *args, **kwargs)

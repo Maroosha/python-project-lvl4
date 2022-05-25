@@ -39,7 +39,8 @@ TASK_LABEL = gettext_lazy('Label')
 TASK_CREATED = gettext_lazy('Task successfully created')
 TASK_CHANGED = gettext_lazy('Task successfully changed')
 TASK_DELETED = gettext_lazy('Task successfully deleted')
-ERROR_DELETE_TASK_BY_NONCREATOR = gettext_lazy('The task can only be deleted by its creator')
+ERROR_DELETE_TASK_BY_NONCREATOR = gettext_lazy('The task can only be deleted \
+by its creator')
 
 # Models
 TASK_CREATED_BY = 'Created_by'

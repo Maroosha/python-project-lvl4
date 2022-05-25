@@ -52,7 +52,6 @@ class CreateStatus(
     success_url = reverse_lazy('statuses:list')
     success_message = STATUS_CREATED
 
-
     def get_context_data(self, **kwargs):
         "Define the title and the button."
         context = super().get_context_data(**kwargs)
@@ -72,7 +71,6 @@ class ChangeStatus(
     form_class = StatusForm
     success_url = reverse_lazy('statuses:list')
     success_message = STATUS_CHANGED
-
 
     def get_context_data(self, **kwargs):
         "Define the title and the button."
@@ -94,7 +92,6 @@ class DeleteStatus(
     success_message = STATUS_DELETED
     error_message = ERROR_STATUS_IN_USE
 
-
     def form_valid(self, form):
         "Check if there are any tasks assigned to the given status."
         try:
@@ -104,7 +101,6 @@ class DeleteStatus(
         else:
             messages.success(self.request, self.success_message)
         return HttpResponseRedirect(self.success_url)
-
 
     def get_context_data(self, **kwargs):
         "Define the title and the button."

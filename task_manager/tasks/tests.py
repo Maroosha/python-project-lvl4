@@ -34,6 +34,7 @@ class TasksTests(TestCase):
         TASKLABELRELATION_FIXTURE,
         LABELS_FIXTURE,
     ]
+
     def setUp(self):
         "Set up statuses."
         # Tasks are seen by logged in users only => self.user
@@ -44,8 +45,6 @@ class TasksTests(TestCase):
         self.task1 = Task.objects.get(pk=1)
         self.task2 = Task.objects.get(pk=2)
         self.task3 = Task.objects.get(pk=4)
-
-
 
     def test_tasks_list(self):
         "Test list of tasks page."
@@ -62,7 +61,6 @@ class TasksTests(TestCase):
             tasks_list,
             [self.task1, self.task2, self.task3],
         )
-
 
     def test_create_task(self):
         "Test create a task."
@@ -97,7 +95,6 @@ class TasksTests(TestCase):
         self.assertEqual('bla bla', task.description)
         self.assertEqual(5, task.id)
 
-
     def test_update_task(self):
         "Test update task."
         self.client.force_login(self.user1)
@@ -130,7 +127,6 @@ class TasksTests(TestCase):
         new_task = Task.objects.get(name=changed_task['name'])
         self.assertEqual(task.id, new_task.id)
 
-
     def test_delete_task(self):
         "Test delete task."
         self.client.force_login(self.user2)
@@ -151,7 +147,6 @@ class TasksTests(TestCase):
             Task.objects.get(pk=task.id)
         self.assertRedirects(response, '/tasks/', status_code=302)
         self.assertContains(response, TASK_DELETED)
-
 
     def test_delete_task_by_non_creator(self):
         "Delete task by a non-creator."
@@ -175,7 +170,6 @@ class TasksTests(TestCase):
             ERROR_DELETE_TASK_BY_NONCREATOR,
         )
 
-
     def test_filter_by_status(self):
         "Filter the tasks by status."
         self.client.force_login(self.user1)
@@ -183,7 +177,6 @@ class TasksTests(TestCase):
         response = self.client.get(filtered_by_status)
         self.assertEqual(response.status_code, 200)
         self.assertQuerysetEqual(list(response.context['tasks']), [self.task3])
-
 
     def test_filter_by_executive(self):
         "Filter the tasks by executive."
@@ -193,7 +186,6 @@ class TasksTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertQuerysetEqual(list(response.context['tasks']), [self.task1])
 
-
     def test_filter_by_label(self):
         "Filter the tasks by label."
         self.client.force_login(self.user1)
@@ -202,11 +194,13 @@ class TasksTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertQuerysetEqual(list(response.context['tasks']), [self.task1])
 
-
     def test_filter_by_own_tasks(self):
         "Filter by own tasks."
         self.client.force_login(self.user2)
         filtered_by_own_tasks = f'{reverse("tasks:list")}?own_task=on'
         response = self.client.get(filtered_by_own_tasks)
         self.assertEqual(response.status_code, 200)
-        self.assertQuerysetEqual(list(response.context['tasks']), [self.task1, self.task2])
+        self.assertQuerysetEqual(
+            list(response.context['tasks']),
+            [self.task1, self.task2],
+        )

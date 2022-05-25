@@ -3,7 +3,6 @@ from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import ProtectedError
 from django.http import HttpResponseRedirect
-# from django.shortcuts import redirect
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from django.urls import reverse_lazy
 from .models import Label
@@ -34,7 +33,6 @@ class LabelList(LoginRequiredMixin, ListView):
     template_name = LABEL_LIST_TEMPLATE
     context_object_name = 'labels'
 
-
     def get_context_data(self, **kwargs):
         "Define the title."
         context = super().get_context_data(**kwargs)
@@ -53,7 +51,6 @@ class CreateLabel(
     form_class = LabelForm
     success_url = reverse_lazy('labels:list')
     success_message = LABEL_CREATED
-
 
     def get_context_data(self, **kwargs):
         "Define the title and the button."
@@ -75,7 +72,6 @@ class ChangeLabel(
     success_url = reverse_lazy('labels:list')
     success_message = LABEL_CHANGED
 
-
     def get_context_data(self, **kwargs):
         "Define the title and the button."
         context = super().get_context_data(**kwargs)
@@ -96,7 +92,6 @@ class Deletelabel(
     success_message = LABEL_DELETED
     error_message = ERROR_LABEL_IN_USE
 
-
     def form_valid(self, form):
         "Check if there are any tasks assigned to the given label."
         try:
@@ -106,7 +101,6 @@ class Deletelabel(
         else:
             messages.success(self.request, self.success_message)
         return HttpResponseRedirect(self.success_url)
-
 
     def get_context_data(self, **kwargs):
         "Define the title and the button."

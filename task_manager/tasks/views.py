@@ -39,7 +39,6 @@ class TaskList(LoginRequiredMixin, FilterView):
     context_object_name = 'tasks'
     filterset_class = FilterTasks
 
-
     def get_context_data(self, **kwargs):
         "Define the title and button text."
         context = super().get_context_data(**kwargs)
@@ -60,9 +59,9 @@ class CreateTask(
     success_url = reverse_lazy('tasks:list')
     success_message = TASK_CREATED
 
-
 # https://stackoverflow.com/questions/55092544/django-and-the-form-valid-method
 # https://github.com/django/django/search?p=1&q=form_valid
+
     def form_valid(self, form):
         """
         Add the user as a task creator.
@@ -72,7 +71,6 @@ class CreateTask(
         """
         form.instance.created_by = User.objects.get(pk=self.request.user.pk)
         return super().form_valid(form)
-
 
     def get_context_data(self, **kwargs):
         "Define the title and the button."
@@ -94,7 +92,6 @@ class ChangeTask(
     success_url = reverse_lazy('tasks:list')
     success_message = TASK_CHANGED
 
-
     def get_context_data(self, **kwargs):
         "Define title and button."
         context = super().get_context_data(**kwargs)
@@ -114,16 +111,14 @@ class DeleteTask(
     success_url = reverse_lazy('tasks:list')
     success_message = TASK_DELETED
 
-
-# https://stackoverflow.com/questions/55092544/django-and-the-form-valid-method
     def form_valid(self, form):
         "Check if the user is a task creator."
+        # https://stackoverflow.com/questions/55092544/django-and-the-form-valid-method
         if self.get_object().created_by != self.request.user:
             messages.error(self.request, ERROR_DELETE_TASK_BY_NONCREATOR)
         else:
             super().form_valid(form)
         return redirect(self.success_url)
-
 
     def get_context_data(self, **kwargs):
         "Define the title and the button."

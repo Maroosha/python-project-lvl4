@@ -22,7 +22,8 @@ PASSWORD2 = 'password2'
 USERNAME = 'username'
 
 # Messages
-CANT_CHANGE_ANOTHER_USER = gettext_lazy('You do not have a permission to change another user')
+CANT_CHANGE_ANOTHER_USER = gettext_lazy('You do not have a permission to change \
+another user')
 LOGIN_REQUIRED = gettext_lazy('You are not authorized. Please, log in.')
 USER_CREATED = gettext_lazy('User successfully created')
 USER_CHANGED = gettext_lazy('User successfully changed')

@@ -13,8 +13,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
-      - name: updating dpendencies and do linter check
+      - name: updating dependencies and do linter check
         run: |
           pip install poetry
-          make install
+          poetry install
           make lint

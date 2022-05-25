@@ -1,6 +1,8 @@
-# from django.db import models
 from django.contrib.auth.models import AbstractUser
-from django.utils.translation import gettext_lazy
+from .constants import (
+    VERBOSE_NAME,
+    VERBOSE_NAME_PL,
+)
 
 class User(AbstractUser):
     "User class."
@@ -12,6 +14,6 @@ class User(AbstractUser):
 
     class Meta:
         'User class details.'
-        verbose_name = gettext_lazy('User')
-        verbose_name_plural = gettext_lazy('Users')
+        verbose_name = VERBOSE_NAME
+        verbose_name_plural = VERBOSE_NAME_PL
         ordering = ['id']

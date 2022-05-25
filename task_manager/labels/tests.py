@@ -1,7 +1,6 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.urls import reverse
-from django.utils.translation import gettext_lazy
 from task_manager.statuses.models import Status
 from task_manager.tasks.models import Task
 from .models import Label
@@ -91,7 +90,7 @@ class LabelsTests(TestCase):
         self.assertRedirects(response, '/labels/', status_code=302)
         self.assertContains(
             response,
-            gettext_lazy(LABEL_CREATED),
+            LABEL_CREATED,
         )
 
         lbl = Label.objects.get(name=new_label['name'])
@@ -121,7 +120,7 @@ class LabelsTests(TestCase):
         self.assertRedirects(response, '/labels/', status_code=302)
         self.assertContains(
             response,
-            gettext_lazy(LABEL_CHANGED),
+            LABEL_CHANGED,
         )
         new_label = Label.objects.get(name=changed_label['name'])
         self.assertEqual(label_.id, new_label.id)
@@ -139,7 +138,7 @@ class LabelsTests(TestCase):
         self.assertRedirects(response, '/labels/')
         self.assertContains(
             response,
-            gettext_lazy(ERROR_LABEL_IN_USE),
+            ERROR_LABEL_IN_USE,
         )
 
 
@@ -164,4 +163,4 @@ class LabelsTests(TestCase):
         with self.assertRaises(Label.DoesNotExist):
             Label.objects.get(pk=label_.id)
         self.assertRedirects(response, '/labels/', status_code=302)
-        self.assertContains(response, gettext_lazy(LABEL_DELETED))
+        self.assertContains(response, LABEL_DELETED)

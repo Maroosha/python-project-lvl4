@@ -1,12 +1,9 @@
 from django.contrib import messages
-# from django.contrib.auth.mixins import AccessMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import ProtectedError
 from django.http import HttpResponseRedirect
-# from django.shortcuts import redirect
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from django.urls import reverse_lazy
-from django.utils.translation import gettext_lazy
 from .forms import CreateUserForm
 from django.contrib.auth import get_user_model
 from .constants import (
@@ -19,7 +16,6 @@ from .constants import (
     DELETE_TEMPLATE,
     DELETE_USER_TITLE,
     ERROR_USER_IN_USE,
-    LOGIN_REQUIRED,
     FORM_TEMPLATE,
     REGISTER_BUTTON,
     USER_CHANGED,
@@ -46,7 +42,7 @@ class UserList(ListView):
     def get_context_data(self, **kwargs):
         '.'
         context = super().get_context_data(**kwargs)
-        context[BUTTON_NAME_TITLE] = gettext_lazy(USER_LIST_TITLE)
+        context[BUTTON_NAME_TITLE] = USER_LIST_TITLE
         return context
 
 
@@ -56,14 +52,14 @@ class CreateUser(SuccessMessageMixin, CreateView):
     template_name = FORM_TEMPLATE
     form_class = CreateUserForm
     success_url = reverse_lazy('login')
-    success_message = gettext_lazy(USER_CREATED)
+    success_message = USER_CREATED
 
 
     def get_context_data(self, **kwargs):
         "Define the title ad the button."
         context = super().get_context_data(**kwargs)
-        context[BUTTON_NAME_TITLE] = gettext_lazy(CREATE_USER_TITLE)
-        context[BUTTON_TEXT] = gettext_lazy(REGISTER_BUTTON)
+        context[BUTTON_NAME_TITLE] = CREATE_USER_TITLE
+        context[BUTTON_TEXT] = REGISTER_BUTTON
         return context
 
 
@@ -78,14 +74,14 @@ class ChangeUser(
     template_name = FORM_TEMPLATE
     form_class = CreateUserForm
     success_url = reverse_lazy('users:list')
-    success_message = gettext_lazy(USER_CHANGED)
+    success_message = USER_CHANGED
 
 
     def get_context_data(self, **kwargs):
         "Define the title ad the button."
         context = super().get_context_data(**kwargs)
-        context[BUTTON_NAME_TITLE] = gettext_lazy(CHANGE_USER_TITLE)
-        context[BUTTON_TEXT] = gettext_lazy(CHANGE_BUTTON)
+        context[BUTTON_NAME_TITLE] = CHANGE_USER_TITLE
+        context[BUTTON_TEXT] = CHANGE_BUTTON
         return context
 
 
@@ -99,15 +95,15 @@ class DeleteUser(
     model = User
     template_name = DELETE_TEMPLATE
     success_url = reverse_lazy('users:list')
-    success_message = gettext_lazy(USER_DELETED)
-    error_message = gettext_lazy(ERROR_USER_IN_USE)
+    success_message = USER_DELETED
+    error_message = ERROR_USER_IN_USE
 
 
     def get_context_data(self, **kwargs):
         "Define the title ad the button."
         context = super().get_context_data(**kwargs)
-        context[BUTTON_NAME_TITLE] = gettext_lazy(DELETE_USER_TITLE)
-        context[BUTTON_TEXT] = gettext_lazy(DELETE_BUTTON)
+        context[BUTTON_NAME_TITLE] = DELETE_USER_TITLE
+        context[BUTTON_TEXT] = DELETE_BUTTON
         return context
 
 

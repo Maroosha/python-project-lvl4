@@ -2,7 +2,6 @@ from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import TemplateView
 from django.contrib.auth.views import LoginView, LogoutView
-from django.utils.translation import gettext_lazy
 from .constants import (
     BUTTON_NAME_TITLE,
     BUTTON_TEXT,
@@ -24,14 +23,14 @@ class IndexPage(TemplateView):
 class Login(SuccessMessageMixin, LoginView):
     "Log in into Task Manager."
     template_name = FORM_TEMPLATE
-    success_message = gettext_lazy(LOGGED_IN)
+    success_message = LOGGED_IN
 
 
     def get_context_data(self, **kwargs):
         '.'
         context = super().get_context_data(**kwargs)
-        context[BUTTON_NAME_TITLE] = gettext_lazy(LOG_IN_TITLE)
-        context[BUTTON_TEXT] = gettext_lazy(LOG_IN_TITLE)
+        context[BUTTON_NAME_TITLE] = LOG_IN_TITLE
+        context[BUTTON_TEXT] = LOG_IN_TITLE
         context[BUTTON_VALUE] = LOGIN_VALUE
         return context
 
@@ -42,5 +41,5 @@ class Logout(SuccessMessageMixin, LogoutView):
 
     def dispatch(self, request, *args, **kwargs):
         "Log out and show a logout message."
-        messages.add_message(request, messages.INFO, gettext_lazy(LOGGED_OUT))
+        messages.add_message(request, messages.INFO, LOGGED_OUT)
         return super().dispatch(request, *args, **kwargs)

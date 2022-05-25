@@ -1,7 +1,6 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.urls import reverse
-from django.utils.translation import gettext_lazy
 from faker import Faker
 from .models import Status
 from task_manager.tasks.models import Task
@@ -83,7 +82,7 @@ class StatusesTest(TestCase):
         self.assertRedirects(response, '/statuses/', status_code=302)
         self.assertContains(
             response,
-            gettext_lazy(STATUS_CREATED),
+            STATUS_CREATED,
         )
 
         status = Status.objects.get(name=new_status['name'])
@@ -115,7 +114,7 @@ class StatusesTest(TestCase):
         self.assertRedirects(response, '/statuses/', status_code=302)
         self.assertContains(
             response,
-            gettext_lazy(STATUS_CHANGED),
+            STATUS_CHANGED,
         )
         new_status = Status.objects.get(name=changed_status['name'])
         self.assertEqual(status.id, new_status.id)
@@ -131,7 +130,7 @@ class StatusesTest(TestCase):
         )
         self.assertTrue(User.objects.filter(pk=status.id).exists())
         self.assertRedirects(response, '/statuses/')
-        self.assertContains(response, gettext_lazy(ERROR_STATUS_IN_USE))
+        self.assertContains(response, ERROR_STATUS_IN_USE)
 
 
     def test_delete_status(self):
@@ -156,4 +155,4 @@ class StatusesTest(TestCase):
             Status.objects.get(pk=status.id)
         # Redirects and messages
         self.assertRedirects(response, '/statuses/', status_code=302)
-        self.assertContains(response, gettext_lazy(STATUS_DELETED))
+        self.assertContains(response, STATUS_DELETED)

@@ -4,10 +4,15 @@ from django.forms import CheckboxInput
 from django.db.models import Value
 from django.db.models.functions import Concat
 from django.contrib.auth import get_user_model
-from django.utils.translation import gettext_lazy
-from .models import Task
 from task_manager.labels.models import Label
 from task_manager.statuses.models import Status
+from .models import Task
+from .constants import (
+    EXECUTIVE_LABEL,
+    LABEL_LABEL,
+    OWN_TASKS_LABEL,
+    STATUS_LABEL,
+)
 
 User = get_user_model()
 
@@ -16,7 +21,7 @@ class FilterTasks(django_filters.FilterSet):
     "Filter the tasks."
     all_statuses = Status.objects.values_list('id', 'name', named=True).all()
     status = ChoiceFilter(
-        label=gettext_lazy('Status'),
+        label=STATUS_LABEL,
         choices=all_statuses,
     )
     all_executives = User.objects.values_list(
@@ -25,16 +30,16 @@ class FilterTasks(django_filters.FilterSet):
         named=True,
     ).all()
     executive = ChoiceFilter(
-        label=gettext_lazy('Executive'),
+        label=EXECUTIVE_LABEL,
         choices=all_executives,
     )
     all_labels = Label.objects.values_list('id', 'name', named=True).all()
     label = ChoiceFilter(
-        label=gettext_lazy('Label'),
+        label=LABEL_LABEL,
         choices=all_labels,
     )
     own_task = BooleanFilter(
-        label=gettext_lazy('my tasks only'),
+        label=OWN_TASKS_LABEL,
         widget=CheckboxInput(),
         method='filter_own_tasks',
         field_name='own_tasks',

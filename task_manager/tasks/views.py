@@ -5,7 +5,6 @@ from django.shortcuts import redirect
 from django.views.generic import CreateView, DeleteView, UpdateView
 from django_filters.views import FilterView
 from django.urls import reverse_lazy
-from django.utils.translation import gettext_lazy
 from django.contrib.auth import get_user_model
 from .models import Task
 from .filters import FilterTasks
@@ -44,8 +43,8 @@ class TaskList(LoginRequiredMixin, FilterView):
     def get_context_data(self, **kwargs):
         "Define the title and button text."
         context = super().get_context_data(**kwargs)
-        context[BUTTON_NAME_TITLE] = gettext_lazy(TASK_LIST_TITLE)
-        context[BUTTON_TEXT] = gettext_lazy(SHOW_BUTTON)
+        context[BUTTON_NAME_TITLE] = TASK_LIST_TITLE
+        context[BUTTON_TEXT] = SHOW_BUTTON
         return context
 
 
@@ -59,7 +58,7 @@ class CreateTask(
     template_name = FORM_TEMPLATE
     form_class = TaskForm
     success_url = reverse_lazy('tasks:list')
-    success_message = gettext_lazy(TASK_CREATED)
+    success_message = TASK_CREATED
 
 
 # https://stackoverflow.com/questions/55092544/django-and-the-form-valid-method
@@ -78,8 +77,8 @@ class CreateTask(
     def get_context_data(self, **kwargs):
         "Define the title and the button."
         context = super().get_context_data(**kwargs)
-        context[BUTTON_NAME_TITLE] = gettext_lazy(CREATE_TASK_TITLE)
-        context[BUTTON_TEXT] = gettext_lazy(CREATE_BUTTON)
+        context[BUTTON_NAME_TITLE] = CREATE_TASK_TITLE
+        context[BUTTON_TEXT] = CREATE_BUTTON
         return context
 
 
@@ -93,14 +92,14 @@ class ChangeTask(
     template_name = FORM_TEMPLATE
     form_class = TaskForm
     success_url = reverse_lazy('tasks:list')
-    success_message = gettext_lazy(TASK_CHANGED)
+    success_message = TASK_CHANGED
 
 
     def get_context_data(self, **kwargs):
         "Define title and button."
         context = super().get_context_data(**kwargs)
-        context[BUTTON_NAME_TITLE] = gettext_lazy(CHANGE_TASK_TITLE)
-        context[BUTTON_TEXT] = gettext_lazy(CHANGE_BUTTON)
+        context[BUTTON_NAME_TITLE] = CHANGE_TASK_TITLE
+        context[BUTTON_TEXT] = CHANGE_BUTTON
         return context
 
 
@@ -113,15 +112,14 @@ class DeleteTask(
     model = Task
     template_name = DELETE_TEMPLATE
     success_url = reverse_lazy('tasks:list')
-    success_message = gettext_lazy(TASK_DELETED)
+    success_message = TASK_DELETED
 
 
 # https://stackoverflow.com/questions/55092544/django-and-the-form-valid-method
     def form_valid(self, form):
-        "Check if the user is an author of a task."
-        error_message = gettext_lazy(ERROR_DELETE_TASK_BY_NONCREATOR)
+        "Check if the user is a task creator."
         if self.get_object().created_by != self.request.user:
-            messages.error(self.request, error_message)
+            messages.error(self.request, ERROR_DELETE_TASK_BY_NONCREATOR)
         else:
             super().form_valid(form)
         return redirect(self.success_url)
@@ -130,6 +128,6 @@ class DeleteTask(
     def get_context_data(self, **kwargs):
         "Define the title and the button."
         context = super().get_context_data(**kwargs)
-        context[BUTTON_NAME_TITLE] = gettext_lazy(DELETE_TASK_TITLE)
-        context[BUTTON_TEXT] = gettext_lazy(DELETE_BUTTON)
+        context[BUTTON_NAME_TITLE] = DELETE_TASK_TITLE
+        context[BUTTON_TEXT] = DELETE_BUTTON
         return context

@@ -3,10 +3,9 @@ from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import ProtectedError
 from django.http import HttpResponseRedirect
-from django.shortcuts import redirect
+# from django.shortcuts import redirect
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from django.urls import reverse_lazy
-from django.utils.translation import gettext_lazy
 from .models import Label
 from .forms import LabelForm
 from .constants import (
@@ -39,7 +38,7 @@ class LabelList(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         "Define the title."
         context = super().get_context_data(**kwargs)
-        context[BUTTON_NAME_TITLE] = gettext_lazy(LABEL_LIST_TITLE)
+        context[BUTTON_NAME_TITLE] = LABEL_LIST_TITLE
         return context
 
 
@@ -53,14 +52,14 @@ class CreateLabel(
     template_name = FORM_TEMPLATE
     form_class = LabelForm
     success_url = reverse_lazy('labels:list')
-    success_message = gettext_lazy(LABEL_CREATED)
+    success_message = LABEL_CREATED
 
 
     def get_context_data(self, **kwargs):
         "Define the title and the button."
         context = super().get_context_data(**kwargs)
-        context[BUTTON_NAME_TITLE] = gettext_lazy(CREATE_LABEL_TITLE)
-        context[BUTTON_TEXT] = gettext_lazy(CREATE_BUTTON)
+        context[BUTTON_NAME_TITLE] = CREATE_LABEL_TITLE
+        context[BUTTON_TEXT] = CREATE_BUTTON
         return context
 
 
@@ -74,14 +73,14 @@ class ChangeLabel(
     template_name = FORM_TEMPLATE
     form_class = LabelForm
     success_url = reverse_lazy('labels:list')
-    success_message = gettext_lazy(LABEL_CHANGED)
+    success_message = LABEL_CHANGED
 
 
     def get_context_data(self, **kwargs):
         "Define the title and the button."
         context = super().get_context_data(**kwargs)
-        context[BUTTON_NAME_TITLE] = gettext_lazy(CHANGE_LABEL_TITLE)
-        context[BUTTON_TEXT] = gettext_lazy(CHANGE_BUTTON)
+        context[BUTTON_NAME_TITLE] = CHANGE_LABEL_TITLE
+        context[BUTTON_TEXT] = CHANGE_BUTTON
         return context
 
 
@@ -94,8 +93,8 @@ class Deletelabel(
     model = Label
     template_name = DELETE_TEMPLATE
     success_url = reverse_lazy('labels:list')
-    success_message = gettext_lazy(LABEL_DELETED)
-    error_message = gettext_lazy(ERROR_LABEL_IN_USE)
+    success_message = LABEL_DELETED
+    error_message = ERROR_LABEL_IN_USE
 
 
     def form_valid(self, form):
@@ -112,6 +111,6 @@ class Deletelabel(
     def get_context_data(self, **kwargs):
         "Define the title and the button."
         context = super().get_context_data(**kwargs)
-        context[BUTTON_NAME_TITLE] = gettext_lazy(DELETE_LABEL_TITLE)
-        context[BUTTON_TEXT] = gettext_lazy(DELETE_BUTTON)
+        context[BUTTON_NAME_TITLE] = DELETE_LABEL_TITLE
+        context[BUTTON_TEXT] = DELETE_BUTTON
         return context

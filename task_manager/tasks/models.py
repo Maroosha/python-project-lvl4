@@ -2,14 +2,16 @@ from django.db import models
 from task_manager.statuses.models import Status
 from task_manager.labels.models import Label
 from django.contrib.auth import get_user_model
-from django.utils.translation import gettext_lazy
 from .constants import (
+    TASK_CREATED_AT,
     TASK_CREATED_BY,
     TASK_DESCRIPTION,
     TASK_EXECUTIVE,
     TASK_LABEL,
     TASK_NAME,
     TASK_STATUS,
+    VERBOSE_NAME,
+    VERBOSE_NAME_PL,
 )
 
 User = get_user_model()
@@ -20,10 +22,10 @@ class Task(models.Model):
     name = models.CharField(  # max < 255 symbols
         max_length=100,
         null=False,
-        verbose_name=gettext_lazy(TASK_NAME),
+        verbose_name=TASK_NAME,
     )
     description = models.TextField(
-        verbose_name=gettext_lazy(TASK_DESCRIPTION),
+        verbose_name=TASK_DESCRIPTION,
     )
     status = models.ForeignKey(
         Status,
@@ -52,7 +54,7 @@ class Task(models.Model):
     )
     created_at = models.DateTimeField(
         auto_now_add=True,
-        verbose_name=gettext_lazy('Created at'),
+        verbose_name=TASK_CREATED_AT,
     )
     modified_at = models.DateTimeField(auto_now=True)
 
@@ -65,8 +67,8 @@ class Task(models.Model):
 
     class Meta:
         "Meta class."
-        verbose_name = gettext_lazy('Task')
-        verbose_name_plural = gettext_lazy('Tasks')
+        verbose_name = VERBOSE_NAME
+        verbose_name_plural = VERBOSE_NAME_PL
         ordering = ['id']
 
 

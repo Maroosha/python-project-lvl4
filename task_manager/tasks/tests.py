@@ -1,7 +1,6 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.urls import reverse
-from django.utils.translation import gettext_lazy
 from .models import Task
 from .constants import (
     DELETE_TEMPLATE,
@@ -91,7 +90,7 @@ class TasksTests(TestCase):
         self.assertRedirects(response, '/tasks/', status_code=302)
         self.assertContains(
             response,
-            gettext_lazy(TASK_CREATED),
+            TASK_CREATED,
         )
 
         task = Task.objects.get(name=new_task['name'])
@@ -126,7 +125,7 @@ class TasksTests(TestCase):
         self.assertRedirects(response, '/tasks/', status_code=302)
         self.assertContains(
             response,
-            gettext_lazy(TASK_CHANGED),
+            TASK_CHANGED,
         )
         new_task = Task.objects.get(name=changed_task['name'])
         self.assertEqual(task.id, new_task.id)
@@ -151,7 +150,7 @@ class TasksTests(TestCase):
         with self.assertRaises(Task.DoesNotExist):
             Task.objects.get(pk=task.id)
         self.assertRedirects(response, '/tasks/', status_code=302)
-        self.assertContains(response, gettext_lazy(TASK_DELETED))
+        self.assertContains(response, TASK_DELETED)
 
 
     def test_delete_task_by_non_creator(self):
@@ -173,7 +172,7 @@ class TasksTests(TestCase):
         self.assertRedirects(response, '/tasks/')
         self.assertContains(
             response,
-            gettext_lazy(ERROR_DELETE_TASK_BY_NONCREATOR),
+            ERROR_DELETE_TASK_BY_NONCREATOR,
         )
 
 

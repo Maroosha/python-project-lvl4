@@ -1,7 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
-from django.utils.translation import gettext_lazy
 from task_manager.tasks.models import Task
 from task_manager.statuses.models import Status
 from .constants import (
@@ -12,11 +11,14 @@ from .constants import (
     LAST_NAME,
     PASSWORD1,
     PASSWORD2,
+    STATUSES_FIXTURE,
+    TASKS_FIXTURE,
     USER_CHANGED,
     USER_CREATED,
     USER_DELETED,
     USER_LIST_TEMPLATE,
     USERNAME,
+    USERS_FIXTURE,
 )
 
 User = get_user_model()
@@ -24,9 +26,9 @@ User = get_user_model()
 
 class UsersTest(TestCase):
     "Test Users app."
-    fixtures = ['users.json', 'statuses.json', 'tasks.json']
+    fixtures = [USERS_FIXTURE, STATUSES_FIXTURE, TASKS_FIXTURE]
 
-    def setUp(self):  # sorta __init__(self): ...
+    def setUp(self):
         "Set up users."
         self.user1 = User.objects.get(pk=1)
         self.user2 = User.objects.get(pk=2)
@@ -42,7 +44,7 @@ class UsersTest(TestCase):
         "Test users list."
         # Issue a GET request.
         response = self.client.get(reverse('users:list'))
-        self.assertTemplateUsed(  # check the template used
+        self.assertTemplateUsed(
             response,
             template_name=USER_LIST_TEMPLATE,
         )
@@ -90,7 +92,7 @@ class UsersTest(TestCase):
         self.assertRedirects(response, '/login/', status_code=302)
         self.assertContains(
             response,
-            gettext_lazy(USER_CREATED),
+            USER_CREATED,
         )
         # Check user details
         new_user = User.objects.get(username=new_user['username'])
@@ -131,7 +133,7 @@ class UsersTest(TestCase):
         self.assertRedirects(response, '/users/', status_code=302)
         self.assertContains(
             response,
-            gettext_lazy(USER_CHANGED),
+            USER_CHANGED,
         )
         # Check user details
         new_user = User.objects.get(username=changed_user['username'])
@@ -153,7 +155,7 @@ class UsersTest(TestCase):
         self.assertRedirects(response, '/users/')
         self.assertContains(
             response,
-            gettext_lazy(ERROR_USER_IN_USE),
+            ERROR_USER_IN_USE,
         )
 
 
@@ -181,4 +183,4 @@ class UsersTest(TestCase):
             User.objects.get(pk=user.id)
         # Redirects and messages
         self.assertRedirects(response, '/users/', status_code=302)
-        self.assertContains(response, gettext_lazy(USER_DELETED))
+        self.assertContains(response, USER_DELETED)

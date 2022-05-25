@@ -5,7 +5,6 @@ from django.db.models import ProtectedError
 from django.http import HttpResponseRedirect
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from django.urls import reverse_lazy
-from django.utils.translation import gettext_lazy
 from .models import Status
 from .forms import StatusForm
 from .constants import (
@@ -37,7 +36,7 @@ class StatusesList(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         "Define the title."
         context = super().get_context_data(**kwargs)
-        context[BUTTON_NAME_TITLE] = gettext_lazy(STATUS_LIST_TITLE)
+        context[BUTTON_NAME_TITLE] = STATUS_LIST_TITLE
         return context
 
 
@@ -51,14 +50,14 @@ class CreateStatus(
     template_name = FORM_TEMPLATE
     form_class = StatusForm
     success_url = reverse_lazy('statuses:list')
-    success_message = gettext_lazy(STATUS_CREATED)
+    success_message = STATUS_CREATED
 
 
     def get_context_data(self, **kwargs):
         "Define the title and the button."
         context = super().get_context_data(**kwargs)
-        context[BUTTON_NAME_TITLE] = gettext_lazy(CREATE_STATUS_TITLE)
-        context[BUTTON_TEXT] = gettext_lazy(CREATE_BUTTON)
+        context[BUTTON_NAME_TITLE] = CREATE_STATUS_TITLE
+        context[BUTTON_TEXT] = CREATE_BUTTON
         return context
 
 
@@ -72,14 +71,14 @@ class ChangeStatus(
     template_name = FORM_TEMPLATE
     form_class = StatusForm
     success_url = reverse_lazy('statuses:list')
-    success_message = gettext_lazy(STATUS_CHANGED)
+    success_message = STATUS_CHANGED
 
 
     def get_context_data(self, **kwargs):
         "Define the title and the button."
         context = super().get_context_data(**kwargs)
-        context[BUTTON_NAME_TITLE] = gettext_lazy(CHANGE_STATUS_TITLE)
-        context[BUTTON_TEXT] = gettext_lazy(CHANGE_BUTTON)
+        context[BUTTON_NAME_TITLE] = CHANGE_STATUS_TITLE
+        context[BUTTON_TEXT] = CHANGE_BUTTON
         return context
 
 
@@ -92,8 +91,8 @@ class DeleteStatus(
     model = Status
     template_name = DELETE_TEMPLATE
     success_url = reverse_lazy('statuses:list')
-    success_message = gettext_lazy(STATUS_DELETED)
-    error_message = gettext_lazy(ERROR_STATUS_IN_USE)
+    success_message = STATUS_DELETED
+    error_message = ERROR_STATUS_IN_USE
 
 
     def form_valid(self, form):
@@ -110,6 +109,6 @@ class DeleteStatus(
     def get_context_data(self, **kwargs):
         "Define the title and the button."
         context = super().get_context_data(**kwargs)
-        context[BUTTON_NAME_TITLE] = gettext_lazy(DELETE_STATUS_TITLE)
-        context[BUTTON_TEXT] = gettext_lazy(DELETE_BUTTON)
+        context[BUTTON_NAME_TITLE] = DELETE_STATUS_TITLE
+        context[BUTTON_TEXT] = DELETE_BUTTON
         return context

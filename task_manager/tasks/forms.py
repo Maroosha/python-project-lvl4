@@ -30,9 +30,9 @@ class TaskForm(forms.ModelForm):
             LABEL,
         ]
         label = {
-            NAME: gettext_lazy(TASK_NAME),
-            DESCRIPTION: gettext_lazy(TASK_DESCRIPTION),
-            STATUS: gettext_lazy(TASK_STATUS),
-            EXECUTIVE: gettext_lazy(TASK_EXECUTIVE),
-            LABEL: gettext_lazy(TASK_LABEL),
+            NAME: TASK_NAME,
+            DESCRIPTION: TASK_DESCRIPTION,
+            STATUS: TASK_STATUS,
+            EXECUTIVE: TASK_EXECUTIVE,
+            LABEL: TASK_LABEL,
         }

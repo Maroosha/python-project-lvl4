@@ -1,18 +1,22 @@
 from django.db import models
-from django.utils.translation import gettext_lazy
+from .constants import (
+    STATUS_CREATED_AT,
+    STATUS_NAME,
+    VERBOSE_NAME,
+    VERBOSE_NAME_PL,
+)
 
 
-# http://www.learningaboutelectronics.com/Articles/verbose-name-and-verbose-name-plural-in-Django.php
 class Status(models.Model):
     "Model for a status."
     name = models.CharField(
         max_length=100,
         null=False,
-        verbose_name=gettext_lazy('Name'),
+        verbose_name=STATUS_NAME,
     )
     created_at = models.DateTimeField(
         auto_now_add=True,
-        verbose_name=gettext_lazy('Created at'),
+        verbose_name=STATUS_CREATED_AT,
     )
     modified_at = models.DateTimeField(auto_now=True)
 
@@ -25,6 +29,6 @@ class Status(models.Model):
 
     class Meta:
         "Meta class."
-        verbose_name = gettext_lazy('Status')
-        verbose_name_plural = gettext_lazy('Statuses')
+        verbose_name = VERBOSE_NAME
+        verbose_name_plural = VERBOSE_NAME_PL
         ordering = ['id']

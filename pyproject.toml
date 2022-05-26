@@ -4,7 +4,7 @@ version = "0.1.0"
 description = ""
 authors = ["Mariia Bilinska <mariiaklochko@gmail.com>"]
 packages = [
-  {include = "task-manager"},
+  {include = "task_manager"},
 ]
 
 [tool.poetry.dependencies]

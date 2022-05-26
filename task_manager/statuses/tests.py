@@ -14,7 +14,6 @@ from .constants import (
     STATUS_DELETED,
     STATUSES_FIXTURE,
     STATUS_LIST_TEMPLATE,
-    STATUS_NAME,
     TASKS_FIXTURE,
     USERS_FIXTURE,
 )

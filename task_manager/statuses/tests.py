@@ -8,6 +8,7 @@ from .constants import (
     DELETE_TEMPLATE,
     ERROR_STATUS_IN_USE,
     FORM_TEMPLATE,
+    NAME,
     STATUS_CHANGED,
     STATUS_CREATED,
     STATUS_DELETED,
@@ -69,7 +70,7 @@ class StatusesTest(TestCase):
         Faker.seed(1)
         name = self.faker.word()
         new_status = {
-            STATUS_NAME: name,
+            NAME: name,
         }
         response = self.client.post(
             reverse('statuses:create'),
@@ -102,7 +103,7 @@ class StatusesTest(TestCase):
         Faker.seed(2)
         name = self.faker.word()
         changed_status = {
-            STATUS_NAME: name,
+            NAME: name,
         }
         response = self.client.post(
             reverse('statuses:change', args=(status.id,)),

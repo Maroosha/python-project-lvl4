@@ -36,7 +36,4 @@ makemigrations_labels:
 test:
 	poetry run python3 manage.py test
 
-test-coverage:
-	poetry run pytest --cov=task_manager
-
 .PHONY: run test locale

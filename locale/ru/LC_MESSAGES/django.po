@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-25 13:50+0100\n"
+"POT-Creation-Date: 2022-05-27 13:34+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,6 +31,10 @@ msgstr "Вы разлогинены"
 #: task_manager/constants.py:19 templates/base.html:47
 msgid "Log in"
 msgstr "Вход"
+
+#: task_manager/constants.py:20
+msgid "Login"
+msgstr "Войти"
 
 #: task_manager/labels/constants.py:8 task_manager/statuses/constants.py:8
 #: task_manager/tasks/constants.py:8
@@ -68,9 +72,8 @@ msgid "Cannot delete a label in use"
 msgstr "Невозможно удалить метку, потому что она используется"
 
 #: task_manager/labels/constants.py:29 task_manager/statuses/constants.py:28
-#: task_manager/tasks/constants.py:46 templates/labels.html:18
-#: templates/statuses.html:18 templates/tasks.html:32
-#: templates/users.html:18
+#: task_manager/tasks/constants.py:47 templates/labels.html:18
+#: templates/statuses.html:18 templates/tasks.html:32 templates/users.html:18
 msgid "Created at"
 msgstr "Дата создания"
 
@@ -169,28 +172,28 @@ msgstr "Задача успешно удалена"
 msgid "The task can only be deleted by its creator"
 msgstr "Задачу может удалить только её автор"
 
-#: task_manager/tasks/constants.py:52
+#: task_manager/tasks/constants.py:53
 msgid "Task"
 msgstr "Задача"
 
-#: task_manager/tasks/constants.py:53 task_manager/tasks/constants.py:56
+#: task_manager/tasks/constants.py:54 task_manager/tasks/constants.py:57
 #: templates/base.html:36
 msgid "Tasks"
 msgstr "Задачи"
 
-#: task_manager/tasks/constants.py:57 templates/tasks.html:12
+#: task_manager/tasks/constants.py:58 templates/tasks.html:12
 msgid "Create a task"
 msgstr "Создать задачу"
 
-#: task_manager/tasks/constants.py:58
+#: task_manager/tasks/constants.py:59
 msgid "Change a task"
 msgstr "Изменить задачу"
 
-#: task_manager/tasks/constants.py:59
+#: task_manager/tasks/constants.py:60
 msgid "Delete a task"
 msgstr "Удалить задачу"
 
-#: task_manager/tasks/constants.py:60
+#: task_manager/tasks/constants.py:61
 msgid "Show"
 msgstr "Показать"
 
@@ -202,44 +205,44 @@ msgstr "Регистрация"
 msgid "You do not have a permission to change another user"
 msgstr "У вас нет прав для изменения другого пользователя"
 
-#: task_manager/users/constants.py:26
+#: task_manager/users/constants.py:27
 msgid "You are not authorized. Please, log in."
 msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
 
-#: task_manager/users/constants.py:27
+#: task_manager/users/constants.py:28
 msgid "User successfully created"
 msgstr "Пользователь успешно зарегистрирован"
 
-#: task_manager/users/constants.py:28
+#: task_manager/users/constants.py:29
 msgid "User successfully changed"
 msgstr "Пользователь успешно изменен"
 
-#: task_manager/users/constants.py:29
+#: task_manager/users/constants.py:30
 msgid "User successfully deleted"
 msgstr "Пользователь успешно удален"
 
-#: task_manager/users/constants.py:30
+#: task_manager/users/constants.py:31
 msgid "Cannot delete a user in use"
 msgstr "Невозможно удалить пользователя, потому что он используется"
 
-#: task_manager/users/constants.py:33
+#: task_manager/users/constants.py:34
 msgid "User"
 msgstr "Пользователь"
 
-#: task_manager/users/constants.py:34 task_manager/users/constants.py:42
+#: task_manager/users/constants.py:35 task_manager/users/constants.py:43
 #: templates/base.html:26
 msgid "Users"
 msgstr "Пользователи"
 
-#: task_manager/users/constants.py:43
+#: task_manager/users/constants.py:44
 msgid "Create a user"
 msgstr "Создать пользователя"
 
-#: task_manager/users/constants.py:44
+#: task_manager/users/constants.py:45
 msgid "Change a user"
 msgstr "Изменить пользователя"
 
-#: task_manager/users/constants.py:45
+#: task_manager/users/constants.py:46
 msgid "Delete a user"
 msgstr "Удалить пользователя"
 

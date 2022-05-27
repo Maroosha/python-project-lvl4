@@ -17,5 +17,5 @@ INDEX_TEMPLATE = 'index.html'
 
 # Titles
 LOG_IN_TITLE = gettext_lazy('Log in')
-LOGIN_VALUE = 'login'
+LOGIN_VALUE = gettext_lazy('Login')
 LOGOUT_VALUE = 'logout'

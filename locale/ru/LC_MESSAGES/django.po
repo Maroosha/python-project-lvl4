@@ -30,7 +30,7 @@ msgstr "Вы разлогинены"
 
 #: task_manager/constants.py:19 templates/base.html:47
 msgid "Log in"
-msgstr "Войти"
+msgstr "Вход"
 
 #: task_manager/labels/constants.py:8 task_manager/statuses/constants.py:8
 #: task_manager/tasks/constants.py:8

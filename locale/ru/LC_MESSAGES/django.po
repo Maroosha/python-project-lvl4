@@ -275,7 +275,7 @@ msgstr "Узнать больше"
 #: templates/labels.html:31 templates/statuses.html:31 templates/tasks.html:48
 #: templates/users.html:32
 msgid "Delete"
-msgstr "Да, удалить"
+msgstr "Удалить"
 
 #: templates/tasks.html:30
 msgid "Created by"

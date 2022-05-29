@@ -51,7 +51,7 @@ msgstr "Изменить"
 #: task_manager/labels/constants.py:10 task_manager/statuses/constants.py:10
 #: task_manager/tasks/constants.py:10 task_manager/users/constants.py:10
 msgid "Yes, delete"
-msgstr ""
+msgstr "Да, удалить"
 
 #: task_manager/labels/constants.py:23
 msgid "Label successfully created"

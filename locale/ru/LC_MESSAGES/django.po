@@ -53,7 +53,7 @@ msgstr "Изменить"
 #: templates/labels.html:31 templates/statuses.html:31 templates/tasks.html:48
 #: templates/users.html:32
 msgid "Delete"
-msgstr "Удалить"
+msgstr "Да, удалить"
 
 #: task_manager/labels/constants.py:23
 msgid "Label successfully created"
@@ -111,7 +111,7 @@ msgstr "Статус успешно создан"
 
 #: task_manager/statuses/constants.py:22
 msgid "Status successfully changed"
-msgstr "Статус успешно изменен"
+msgstr "Статус успешно изменён"
 
 #: task_manager/statuses/constants.py:23
 msgid "Status successfully deleted"

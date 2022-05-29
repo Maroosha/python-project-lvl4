@@ -25,10 +25,10 @@ USERS_FIXTURE = 'users.json'
 # Forms
 NAME = 'name'
 DESCRIPTION = 'description'
-STATUS = gettext_lazy('status')
+STATUS = 'status'
 CREATED_BY = 'created_by'
-EXECUTIVE = gettext_lazy('executive')
-LABEL = gettext_lazy('labels')
+EXECUTIVE = 'executive'
+LABEL = 'labels'
 TASK_NAME = gettext_lazy('Name')
 TASK_DESCRIPTION = gettext_lazy('Description')
 TASK_STATUS = gettext_lazy('Status')

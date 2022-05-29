@@ -113,7 +113,7 @@ msgstr "Статус успешно изменён"
 
 #: task_manager/statuses/constants.py:23
 msgid "Status successfully deleted"
-msgstr "Статус успешно удален"
+msgstr "Статус успешно удалён"
 
 #: task_manager/statuses/constants.py:24
 msgid "Cannot delete a status in use"
@@ -217,7 +217,7 @@ msgstr "Пользователь успешно изменён"
 
 #: task_manager/users/constants.py:30
 msgid "User successfully deleted"
-msgstr "Пользователь успешно удален"
+msgstr "Пользователь успешно удалён"
 
 #: task_manager/users/constants.py:31
 msgid "Cannot delete a user in use"

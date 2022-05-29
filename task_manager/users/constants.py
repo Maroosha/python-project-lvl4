@@ -7,7 +7,7 @@ BUTTON_NAME_TITLE = 'title'
 BUTTON_TEXT = 'button_text'
 REGISTER_BUTTON = gettext_lazy('Register')
 CHANGE_BUTTON = gettext_lazy('Change')
-DELETE_BUTTON = gettext_lazy('Delete')
+DELETE_BUTTON = gettext_lazy('Yes, delete')
 
 # Fixtures
 STATUSES_FIXTURE = 'statuses.json'

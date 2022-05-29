@@ -7,7 +7,7 @@ BUTTON_NAME_TITLE = 'title'
 BUTTON_TEXT = 'button_text'
 CREATE_BUTTON = gettext_lazy('Create')
 CHANGE_BUTTON = gettext_lazy('Change')
-DELETE_BUTTON = gettext_lazy('Delete')
+DELETE_BUTTON = gettext_lazy('Yes, delete')
 
 # Fixtures
 LABELS_FIXTURE = 'labels.json'

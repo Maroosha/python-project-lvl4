@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-29 11:43+0100\n"
+"POT-Creation-Date: 2022-05-29 12:10+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -50,10 +50,8 @@ msgstr "Изменить"
 
 #: task_manager/labels/constants.py:10 task_manager/statuses/constants.py:10
 #: task_manager/tasks/constants.py:10 task_manager/users/constants.py:10
-#: templates/labels.html:31 templates/statuses.html:31 templates/tasks.html:48
-#: templates/users.html:32
-msgid "Delete"
-msgstr "Да, удалить"
+msgid "Yes, delete"
+msgstr ""
 
 #: task_manager/labels/constants.py:23
 msgid "Label successfully created"
@@ -273,6 +271,11 @@ msgstr "Практические курсы по программировани�
 #: templates/index.html:13
 msgid "Learn more"
 msgstr "Узнать больше"
+
+#: templates/labels.html:31 templates/statuses.html:31 templates/tasks.html:48
+#: templates/users.html:32
+msgid "Delete"
+msgstr "Да, удалить"
 
 #: templates/tasks.html:30
 msgid "Created by"

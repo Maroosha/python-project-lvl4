@@ -5,7 +5,7 @@ from django.utils.translation import gettext_lazy
 # Buttons
 BUTTON_NAME_TITLE = 'title'
 BUTTON_TEXT = 'button_text'
-REGISTER_BUTTON = gettext_lazy('Sign up')
+REGISTER_BUTTON = gettext_lazy('Register')
 CHANGE_BUTTON = gettext_lazy('Change')
 DELETE_BUTTON = gettext_lazy('Delete')
 

@@ -33,6 +33,9 @@ makemigrations_labels:
 	poetry run python3 manage.py makemigrations labels
 	poetry run python3 manage.py migrate
 
+runserver:
+	poetry run python3 manage.py runserver
+
 test:
 	poetry run python3 manage.py test
 

@@ -5,7 +5,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from .constants import (
     BUTTON_NAME_TITLE,
     BUTTON_TEXT,
-#    BUTTON_VALUE,
+    BUTTON_VALUE,
     FORM_TEMPLATE,
     INDEX_TEMPLATE,
     LOGGED_IN,
@@ -28,9 +28,9 @@ class Login(SuccessMessageMixin, LoginView):
     def get_context_data(self, **kwargs):
         "Set up buttons."
         context = super().get_context_data(**kwargs)
-#        context[BUTTON_NAME_TITLE] = LOGIN_VALUE
-        context[BUTTON_TEXT] = LOGIN_VALUE
-#        context[BUTTON_VALUE] = LOGIN_VALUE
+        context[BUTTON_NAME_TITLE] = LOG_IN_TITLE
+        context[BUTTON_TEXT] = LOG_IN_TITLE
+        context[BUTTON_VALUE] = LOGIN_VALUE
         return context
 
 

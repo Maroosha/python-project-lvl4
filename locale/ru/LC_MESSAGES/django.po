@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-29 12:10+0100\n"
+"POT-Creation-Date: 2022-05-29 13:22+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -82,12 +82,11 @@ msgid "Name"
 msgstr "Имя"
 
 #: task_manager/labels/constants.py:31 task_manager/tasks/constants.py:14
-#: task_manager/tasks/constants.py:36
 msgid "Label"
 msgstr "Метка"
 
 #: task_manager/labels/constants.py:32 task_manager/labels/constants.py:40
-#: templates/base.html:33
+#: task_manager/tasks/constants.py:36 templates/base.html:33
 msgid "Labels"
 msgstr "Метки"
 
@@ -148,7 +147,7 @@ msgstr "Исполнитель"
 
 #: task_manager/tasks/constants.py:15
 msgid "my tasks only"
-msgstr "только свои задачи"
+msgstr "Только свои задачи"
 
 #: task_manager/tasks/constants.py:33
 msgid "Description"

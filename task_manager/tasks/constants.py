@@ -28,12 +28,12 @@ DESCRIPTION = 'description'
 STATUS = 'status'
 CREATED_BY = 'created_by'
 EXECUTIVE = 'executive'
-LABEL = 'label'
+LABEL = 'labels'
 TASK_NAME = gettext_lazy('Name')
 TASK_DESCRIPTION = gettext_lazy('Description')
 TASK_STATUS = gettext_lazy('Status')
 TASK_EXECUTIVE = gettext_lazy('Executive')
-TASK_LABEL = gettext_lazy('Label')
+TASK_LABEL = gettext_lazy('Labels')
 
 # Messages
 TASK_CREATED = gettext_lazy('Task successfully created')

@@ -45,7 +45,7 @@ class Task(models.Model):
         null=True,
         related_name=TASK_EXECUTIVE,
     )
-    label = models.ManyToManyField(
+    labels = models.ManyToManyField(
         Label,
         related_name=TASK_LABEL,
         blank=True,

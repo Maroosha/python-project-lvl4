@@ -1,7 +1,6 @@
 from django import forms
 from .models import Task
 from .constants import (
-    CREATED_BY,
     DESCRIPTION,
     EXECUTIVE,
     LABEL,
@@ -24,7 +23,7 @@ class TaskForm(forms.ModelForm):
             NAME,
             DESCRIPTION,
             STATUS,
-            CREATED_BY,
+#            CREATED_BY,
             EXECUTIVE,
             LABEL,
         ]

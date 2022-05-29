@@ -23,7 +23,6 @@ class TaskForm(forms.ModelForm):
             NAME,
             DESCRIPTION,
             STATUS,
-#            CREATED_BY,
             EXECUTIVE,
             LABEL,
         ]

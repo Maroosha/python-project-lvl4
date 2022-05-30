@@ -25,6 +25,7 @@ class Task(models.Model):
         verbose_name=TASK_NAME,
     )
     description = models.TextField(
+        blank=True,
         verbose_name=TASK_DESCRIPTION,
     )
     status = models.ForeignKey(

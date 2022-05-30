@@ -31,26 +31,23 @@ class Task(models.Model):
         Status,
         on_delete=models.PROTECT,
         null=True,
-#        related_name=TASK_STATUS,
-        related_name='task_status',
+        verbose_name=TASK_STATUS,
     )
     created_by = models.ForeignKey(
         User,
         on_delete=models.PROTECT,
         null=False,
-#        related_name=TASK_CREATED_BY,
-        related_name='task_created_by',
+        verbose_name=TASK_CREATED_BY,
     )
     executive = models.ForeignKey(
         User,
         on_delete=models.PROTECT,
         null=True,
-#        related_name=TASK_EXECUTIVE,
-        related_name='task_executive',
+        verbose_name=TASK_EXECUTIVE,
     )
     labels = models.ManyToManyField(
         Label,
-        related_name=TASK_LABEL,
+        verbose_name=TASK_LABEL,
         blank=True,
         through='TaskLabelRelation',
         through_fields=('task', 'label'),

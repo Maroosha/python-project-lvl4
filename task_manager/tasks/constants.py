@@ -8,6 +8,7 @@ BUTTON_TEXT = 'button_text'
 CREATE_BUTTON = gettext_lazy('Create')
 CHANGE_BUTTON = gettext_lazy('Change')
 DELETE_BUTTON = gettext_lazy('Yes, delete')
+SHOW_BUTTON = gettext_lazy('Show')
 
 # Filters
 EXECUTIVE_LABEL = gettext_lazy('Executive')
@@ -48,6 +49,7 @@ TASK_CREATED_AT = gettext_lazy('Created at')
 
 # Templates
 TASK_LIST_TEMPLATE = 'tasks.html'
+TASK_VIEW_TEMPLATE = 'task_view.html'
 FORM_TEMPLATE = 'form.html'
 DELETE_TEMPLATE = 'delete.html'
 VERBOSE_NAME = gettext_lazy('Task')
@@ -55,7 +57,7 @@ VERBOSE_NAME_PL = gettext_lazy('Tasks')
 
 # Titles
 TASK_LIST_TITLE = gettext_lazy('Tasks')
+TASK_VIEW_TITLE = gettext_lazy('Task view')
 CREATE_TASK_TITLE = gettext_lazy('Create a task')
 CHANGE_TASK_TITLE = gettext_lazy('Change a task')
 DELETE_TASK_TITLE = gettext_lazy('Delete a task')
-SHOW_BUTTON = gettext_lazy('Show')

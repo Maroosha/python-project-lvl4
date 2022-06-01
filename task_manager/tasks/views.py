@@ -2,7 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import redirect
-from django.views.generic import CreateView, DeleteView, UpdateView
+from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
 from django_filters.views import FilterView
 from django.urls import reverse_lazy
 from django.contrib.auth import get_user_model
@@ -21,12 +21,15 @@ from .constants import (
     DELETE_TASK_TITLE,
     ERROR_DELETE_TASK_BY_NONCREATOR,
     FORM_TEMPLATE,
+    LABEL,
     SHOW_BUTTON,
     TASK_CHANGED,
     TASK_CREATED,
     TASK_DELETED,
     TASK_LIST_TEMPLATE,
     TASK_LIST_TITLE,
+    TASK_VIEW_TEMPLATE,
+    TASK_VIEW_TITLE,
 )
 
 User = get_user_model()
@@ -40,10 +43,24 @@ class TaskList(LoginRequiredMixin, FilterView):
     filterset_class = FilterTasks
 
     def get_context_data(self, **kwargs):
-        "Define the title and button text."
+        "Set the title and button text."
         context = super().get_context_data(**kwargs)
         context[BUTTON_NAME_TITLE] = TASK_LIST_TITLE
         context[BUTTON_TEXT] = SHOW_BUTTON
+        return context
+
+
+class TaskView(LoginRequiredMixin, DetailView):
+    "View task details."
+    model = Task
+    template_name = TASK_VIEW_TEMPLATE
+    context_object_name = 'task_view'
+
+    def get_context_data(self, **kwargs):
+        "Set the title and labels."
+        context = super().get_context_data(**kwargs)
+        context[BUTTON_NAME_TITLE] = TASK_VIEW_TITLE
+        context[LABEL] = self.get_object().labels.all()
         return context
 
 

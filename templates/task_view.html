@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load bootstrap4 %}
+{% load static %}
+{% block content %}
+<div class="container wrapper flex-grow-1">
+    <div class="card">
+        <div class="card-body p-5 bg-light mt-5 pt-4 pb-16">
+            <h1 class="my-4">
+                {{ title }}
+            </h1>
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    <h2>{{ task_view.name }}</h2>
+                </div>
+                <div class="card-body bg-white">
+                    <p>{{ task_view.description }}</p>
+                    <hr>
+                    <div class="container">
+                        <div class="row p-1">
+                            <div class="col">{% translate "Created by" %}</div>
+                            <div class="col">{{ task_view.created_by }}</div>
+                        </div>
+                        <div class="row p-1">
+                            <div class="col">{% translate "Executive" %}</div>
+                            <div class="col">{{ task_view.executive }}</div>
+                        </div>
+                        <div class="row p-1">
+                            <div class="col">{% translate "Status" %}</div>
+                            <div class="col">{{ task_view.status }}</div>
+                        </div>
+                        <div class="row p-1">
+                            <div class="col">{% translate "Created at" %}</div>
+                            <div class="col">{{ task_view.created_at }}</div>
+                        </div>
+                        <div class="row p-1">
+                            <div class="col">
+                                <h6>{% translate "Labels:" %}</h6>
+                                <ul>
+                                    {% for label in labels %}
+                                    <li>{{ label.name }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row p-1">
+                            <div class="col">
+                                <a href="{% url 'tasks:change' task_view.id %}">{% translate "Change" %}</a>
+                                <br>
+                                <a href="{% url 'tasks:delete' task_view.id %}">{% translate "Delete" %}</a>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-29 15:12+0100\n"
+"POT-Creation-Date: 2022-06-01 12:12+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -43,8 +43,8 @@ msgstr "Создать"
 
 #: task_manager/labels/constants.py:9 task_manager/statuses/constants.py:9
 #: task_manager/tasks/constants.py:9 task_manager/users/constants.py:9
-#: templates/labels.html:29 templates/statuses.html:29 templates/tasks.html:46
-#: templates/users.html:30
+#: templates/labels.html:29 templates/statuses.html:29
+#: templates/task_view.html:48 templates/tasks.html:48 templates/users.html:30
 msgid "Change"
 msgstr "Изменить"
 
@@ -70,23 +70,24 @@ msgid "Cannot delete a label in use"
 msgstr "Невозможно удалить метку, потому что она используется"
 
 #: task_manager/labels/constants.py:29 task_manager/statuses/constants.py:28
-#: task_manager/tasks/constants.py:47 templates/labels.html:18
-#: templates/statuses.html:18 templates/tasks.html:32 templates/users.html:18
+#: task_manager/tasks/constants.py:48 templates/labels.html:18
+#: templates/statuses.html:18 templates/task_view.html:33
+#: templates/tasks.html:32 templates/users.html:18
 msgid "Created at"
 msgstr "Дата создания"
 
 #: task_manager/labels/constants.py:30 task_manager/statuses/constants.py:27
-#: task_manager/tasks/constants.py:32 templates/labels.html:17
+#: task_manager/tasks/constants.py:33 templates/labels.html:17
 #: templates/statuses.html:17 templates/tasks.html:28
 msgid "Name"
 msgstr "Имя"
 
-#: task_manager/labels/constants.py:31 task_manager/tasks/constants.py:14
+#: task_manager/labels/constants.py:31 task_manager/tasks/constants.py:15
 msgid "Label"
 msgstr "Метка"
 
 #: task_manager/labels/constants.py:32 task_manager/labels/constants.py:40
-#: task_manager/tasks/constants.py:36 templates/base.html:33
+#: task_manager/tasks/constants.py:37 templates/base.html:33
 msgid "Labels"
 msgstr "Метки"
 
@@ -118,8 +119,9 @@ msgstr "Статус успешно удалён"
 msgid "Cannot delete a status in use"
 msgstr "Невозможно удалить статус, потому что он используется"
 
-#: task_manager/statuses/constants.py:29 task_manager/tasks/constants.py:16
-#: task_manager/tasks/constants.py:34 templates/tasks.html:29
+#: task_manager/statuses/constants.py:29 task_manager/tasks/constants.py:17
+#: task_manager/tasks/constants.py:35 templates/task_view.html:29
+#: templates/tasks.html:29
 msgid "Status"
 msgstr "Статус"
 
@@ -140,59 +142,65 @@ msgstr "Изменить статус"
 msgid "Delete a status"
 msgstr "Удалить статус"
 
-#: task_manager/tasks/constants.py:13 task_manager/tasks/constants.py:35
-#: templates/tasks.html:31
+#: task_manager/tasks/constants.py:11
+msgid "Show"
+msgstr "Показать"
+
+#: task_manager/tasks/constants.py:14 task_manager/tasks/constants.py:36
+#: templates/task_view.html:25 templates/tasks.html:31
 msgid "Executive"
 msgstr "Исполнитель"
 
-#: task_manager/tasks/constants.py:15
+#: task_manager/tasks/constants.py:16
 msgid "my tasks only"
 msgstr "Только свои задачи"
 
-#: task_manager/tasks/constants.py:33
+#: task_manager/tasks/constants.py:34
 msgid "Description"
 msgstr "Описание"
 
-#: task_manager/tasks/constants.py:39
+#: task_manager/tasks/constants.py:40
 msgid "Task successfully created"
 msgstr "Задача успешно создана"
 
-#: task_manager/tasks/constants.py:40
+#: task_manager/tasks/constants.py:41
 msgid "Task successfully changed"
 msgstr "Задача успешно изменена"
 
-#: task_manager/tasks/constants.py:41
+#: task_manager/tasks/constants.py:42
 msgid "Task successfully deleted"
 msgstr "Задача успешно удалена"
 
-#: task_manager/tasks/constants.py:42
+#: task_manager/tasks/constants.py:43
 msgid "The task can only be deleted by its creator"
 msgstr "Задачу может удалить только её автор"
 
-#: task_manager/tasks/constants.py:53
+#: task_manager/tasks/constants.py:55
 msgid "Task"
 msgstr "Задача"
 
-#: task_manager/tasks/constants.py:54 task_manager/tasks/constants.py:57
+#: task_manager/tasks/constants.py:56 task_manager/tasks/constants.py:59
 #: templates/base.html:36
 msgid "Tasks"
 msgstr "Задачи"
 
-#: task_manager/tasks/constants.py:58 templates/tasks.html:12
+#: task_manager/tasks/constants.py:60
+#, fuzzy
+#| msgid "Task"
+msgid "Task view"
+msgstr "Просмотр задачи"
+
+#: task_manager/tasks/constants.py:61 templates/tasks.html:12
 msgid "Create a task"
 msgstr "Создать задачу"
 
-#: task_manager/tasks/constants.py:59
+#: task_manager/tasks/constants.py:62
 msgid "Change a task"
 msgstr "Изменить задачу"
 
-#: task_manager/tasks/constants.py:60
+#: task_manager/tasks/constants.py:63
 msgid "Delete a task"
 msgstr "Удалить задачу"
-
-#: task_manager/tasks/constants.py:61
-msgid "Show"
-msgstr "Показать"
 
 #: task_manager/users/constants.py:8
 msgid "Register"
@@ -271,14 +279,20 @@ msgstr "Практические курсы по программировани�
 msgid "Learn more"
 msgstr "Узнать больше"
 
-#: templates/labels.html:31 templates/statuses.html:31 templates/tasks.html:48
-#: templates/users.html:32
+#: templates/labels.html:31 templates/statuses.html:31
+#: templates/task_view.html:50 templates/tasks.html:50 templates/users.html:32
 msgid "Delete"
 msgstr "Удалить"
 
-#: templates/tasks.html:30
+#: templates/task_view.html:21 templates/tasks.html:30
 msgid "Created by"
 msgstr "Автор"
+
+#: templates/task_view.html:38
+#, fuzzy
+#| msgid "Labels"
+msgid "Labels:"
+msgstr "Метки:"
 
 #: templates/users.html:16
 msgid "User name"

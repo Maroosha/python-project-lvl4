@@ -42,7 +42,7 @@ class Task(models.Model):
         verbose_name=TASK_CREATED_BY,
         related_name='task_created_by',
     )
-    executive = models.ForeignKey(
+    executor = models.ForeignKey(
         User,
         on_delete=models.PROTECT,
         null=True,

@@ -29,7 +29,7 @@ class FilterTasks(django_filters.FilterSet):
         Concat('first_name', Value(' '), 'last_name'),
         named=True,
     ).all()
-    executive = ChoiceFilter(
+    executor = ChoiceFilter(
         label=EXECUTIVE_LABEL,
         choices=all_executives,
     )
@@ -62,4 +62,4 @@ class FilterTasks(django_filters.FilterSet):
 
     class Meta:
         model = Task
-        fields = ['status', 'executive', 'labels']
+        fields = ['status', 'executor', 'labels']

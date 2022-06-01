@@ -181,7 +181,7 @@ class TasksTests(TestCase):
     def test_filter_by_executive(self):
         "Filter the tasks by executive."
         self.client.force_login(self.user1)
-        filtered_by_executive = f'{reverse("tasks:list")}?executive=2'
+        filtered_by_executive = f'{reverse("tasks:list")}?executor=2'
         response = self.client.get(filtered_by_executive)
         self.assertEqual(response.status_code, 200)
         self.assertQuerysetEqual(list(response.context['tasks']), [self.task1])
@@ -192,7 +192,10 @@ class TasksTests(TestCase):
         filtered_by_label = f'{reverse("tasks:list")}?label=1'
         response = self.client.get(filtered_by_label)
         self.assertEqual(response.status_code, 200)
-        self.assertQuerysetEqual(list(response.context['tasks']), [self.task1])
+        self.assertQuerysetEqual(
+            list(response.context['tasks']),
+            [self.task1, self.task2, self.task3],
+        )
 
     def test_filter_by_own_tasks(self):
         "Filter by own tasks."

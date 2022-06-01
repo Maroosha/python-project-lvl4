@@ -34,7 +34,7 @@ class FilterTasks(django_filters.FilterSet):
         choices=all_executives,
     )
     all_labels = Label.objects.values_list('id', 'name', named=True).all()
-    label = ChoiceFilter(
+    labels = ChoiceFilter(
         label=LABEL_LABEL,
         choices=all_labels,
     )
@@ -62,4 +62,4 @@ class FilterTasks(django_filters.FilterSet):
 
     class Meta:
         model = Task
-        fields = ['status', 'executive', 'label']
+        fields = ['status', 'executive', 'labels']

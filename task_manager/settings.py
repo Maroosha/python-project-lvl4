@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 import dj_database_url
 import os
-import rollbar
+#import rollbar
 import sys
 from dotenv import load_dotenv
 from pathlib import Path
@@ -74,7 +74,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'rollbar.contrib.django.middleware.RollbarNotifierMiddleware',
+#    'rollbar.contrib.django.middleware.RollbarNotifierMiddleware',
 ]
 
 AUTH_USER_MODEL = "users.User"
@@ -102,13 +102,13 @@ WSGI_APPLICATION = 'task_manager.wsgi.application'
 # Rollbar
 # https://docs.rollbar.com/docs/django
 
-ROLLBAR = {
-    'access_token': os.environ.get('ACCESS_TOKEN'),
-    'environment': 'development' if DEBUG else 'production',
-    'root': BASE_DIR,
-}
+#ROLLBAR = {
+#    'access_token': os.environ.get('ACCESS_TOKEN'),
+#    'environment': 'development' if DEBUG else 'production',
+#    'root': BASE_DIR,
+#}
 
-rollbar.init(**ROLLBAR)
+#rollbar.init(**ROLLBAR)
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases

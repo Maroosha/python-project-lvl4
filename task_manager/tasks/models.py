@@ -47,7 +47,7 @@ class Task(models.Model):
         on_delete=models.PROTECT,
         null=True,
         verbose_name=TASK_EXECUTIVE,
-        related_name='task_executive',
+        related_name='task_executor',
     )
     labels = models.ManyToManyField(
         Label,

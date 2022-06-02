@@ -38,7 +38,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY'),
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "afternoon-shore-73997.herokuapp.com",
+    "enigmatic-spire-21419.herokuapp.com",
     "localhost",
     "127.0.0.1",
     "webserver",

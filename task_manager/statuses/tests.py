@@ -12,10 +12,7 @@ from .constants import (
     STATUS_CHANGED,
     STATUS_CREATED,
     STATUS_DELETED,
-    STATUSES_FIXTURE,
     STATUS_LIST_TEMPLATE,
-    TASKS_FIXTURE,
-    USERS_FIXTURE,
 )
 
 User = get_user_model()
@@ -24,9 +21,9 @@ User = get_user_model()
 class StatusesTest(TestCase):
     "Test Statuses app."
     fixtures = [
-        USERS_FIXTURE,
-        STATUSES_FIXTURE,
-        TASKS_FIXTURE,
+        'users.json',
+        'statuses.json',
+        'tasks.json',
     ]
 
     def setUp(self):

@@ -12,12 +12,7 @@ from .constants import (
     LABEL_CREATED,
     LABEL_DELETED,
     LABEL_LIST_TEMPLATE,
-    LABELS_FIXTURE,
-    STATUSES_FIXTURE,
     NAME,
-    TASKS_FIXTURE,
-    TASKLABELRELATION_FIXTURE,
-    USERS_FIXTURE,
 )
 
 User = get_user_model()
@@ -26,11 +21,11 @@ User = get_user_model()
 class LabelsTests(TestCase):
     "Test tasks."
     fixtures = [
-        USERS_FIXTURE,
-        STATUSES_FIXTURE,
-        TASKS_FIXTURE,
-        TASKLABELRELATION_FIXTURE,
-        LABELS_FIXTURE,
+        'users.json',
+        'statuses.json',
+        'tasks.json',
+        'tasklabelrelation.json',
+        'labels.json',
     ]
 
     def setUp(self):

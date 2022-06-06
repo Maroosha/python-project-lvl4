@@ -9,11 +9,6 @@ CREATE_BUTTON = gettext_lazy('Create')
 CHANGE_BUTTON = gettext_lazy('Change')
 DELETE_BUTTON = gettext_lazy('Yes, delete')
 
-# Fixtures
-STATUSES_FIXTURE = 'statuses.json'
-TASKS_FIXTURE = 'tasks.json'
-USERS_FIXTURE = 'users.json'
-
 # Forms
 NAME = 'name'
 

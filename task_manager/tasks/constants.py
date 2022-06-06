@@ -16,13 +16,6 @@ LABEL_LABEL = gettext_lazy('Label')
 OWN_TASKS_LABEL = gettext_lazy('my tasks only')
 STATUS_LABEL = gettext_lazy('Status')
 
-# Fixtures
-LABELS_FIXTURE = 'labels.json'
-STATUSES_FIXTURE = 'statuses.json'
-TASKS_FIXTURE = 'tasks.json'
-TASKLABELRELATION_FIXTURE = 'tasklabelrelation.json'
-USERS_FIXTURE = 'users.json'
-
 # Forms
 NAME = 'name'
 DESCRIPTION = 'description'

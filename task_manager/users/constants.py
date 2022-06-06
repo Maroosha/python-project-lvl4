@@ -9,11 +9,6 @@ REGISTER_BUTTON = gettext_lazy('Register')
 CHANGE_BUTTON = gettext_lazy('Change')
 DELETE_BUTTON = gettext_lazy('Yes, delete')
 
-# Fixtures
-STATUSES_FIXTURE = 'statuses.json'
-TASKS_FIXTURE = 'tasks.json'
-USERS_FIXTURE = 'users.json'
-
 # Forms
 FIRST_NAME = 'first_name'
 LAST_NAME = 'last_name'

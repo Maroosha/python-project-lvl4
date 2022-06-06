@@ -9,17 +9,12 @@ from .constants import (
     ERROR_DELETE_TASK_BY_NONCREATOR,
     EXECUTIVE,
     FORM_TEMPLATE,
-    LABELS_FIXTURE,
     TASK_CHANGED,
     TASK_CREATED,
     TASK_DELETED,
     STATUS,
-    STATUSES_FIXTURE,
     TASK_LIST_TEMPLATE,
     NAME,
-    TASKS_FIXTURE,
-    TASKLABELRELATION_FIXTURE,
-    USERS_FIXTURE,
 )
 
 User = get_user_model()
@@ -28,11 +23,11 @@ User = get_user_model()
 class TasksTests(TestCase):
     "Test tasks."
     fixtures = [
-        USERS_FIXTURE,
-        STATUSES_FIXTURE,
-        TASKS_FIXTURE,
-        TASKLABELRELATION_FIXTURE,
-        LABELS_FIXTURE,
+        'users.json',
+        'statuses.json',
+        'tasks.json',
+        'tasklabelrelation.json',
+        'labels.json'
     ]
 
     def setUp(self):

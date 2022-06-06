@@ -11,14 +11,11 @@ from .constants import (
     LAST_NAME,
     PASSWORD1,
     PASSWORD2,
-    STATUSES_FIXTURE,
-    TASKS_FIXTURE,
     USER_CHANGED,
     USER_CREATED,
     USER_DELETED,
     USER_LIST_TEMPLATE,
     USERNAME,
-    USERS_FIXTURE,
 )
 
 User = get_user_model()
@@ -26,7 +23,7 @@ User = get_user_model()
 
 class UsersTest(TestCase):
     "Test Users app."
-    fixtures = [USERS_FIXTURE, STATUSES_FIXTURE, TASKS_FIXTURE]
+    fixtures = ['users.json', 'statuses.json', 'tasks.json']
 
     def setUp(self):
         "Set up users."

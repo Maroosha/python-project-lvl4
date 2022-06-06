@@ -35,7 +35,7 @@ VERBOSE_NAME = gettext_lazy('User')
 VERBOSE_NAME_PL = gettext_lazy('Users')
 
 # Templates
-USER_LIST_TEMPLATE = 'users.html'
+USER_LIST_TEMPLATE = 'users/users.html'
 FORM_TEMPLATE = 'form.html'
 DELETE_TEMPLATE = 'delete.html'
 

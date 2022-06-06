@@ -32,7 +32,7 @@ VERBOSE_NAME = gettext_lazy('Label')
 VERBOSE_NAME_PL = gettext_lazy('Labels')
 
 # Templates
-LABEL_LIST_TEMPLATE = 'labels.html'
+LABEL_LIST_TEMPLATE = 'labels/labels.html'
 FORM_TEMPLATE = 'form.html'
 DELETE_TEMPLATE = 'delete.html'
 

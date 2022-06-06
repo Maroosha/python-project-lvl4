@@ -30,7 +30,7 @@ VERBOSE_NAME = gettext_lazy('Status')
 VERBOSE_NAME_PL = gettext_lazy('Statuses')
 
 # Templates
-STATUS_LIST_TEMPLATE = 'statuses.html'
+STATUS_LIST_TEMPLATE = 'statuses/statuses.html'
 FORM_TEMPLATE = 'form.html'
 DELETE_TEMPLATE = 'delete.html'
 

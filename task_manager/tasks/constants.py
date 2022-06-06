@@ -48,8 +48,8 @@ TASK_CREATED_BY = 'Created_by'
 TASK_CREATED_AT = gettext_lazy('Created at')
 
 # Templates
-TASK_LIST_TEMPLATE = 'tasks.html'
-TASK_VIEW_TEMPLATE = 'task_view.html'
+TASK_LIST_TEMPLATE = 'tasks/tasks.html'
+TASK_VIEW_TEMPLATE = 'tasks/task_view.html'
 FORM_TEMPLATE = 'form.html'
 DELETE_TEMPLATE = 'delete.html'
 VERBOSE_NAME = gettext_lazy('Task')

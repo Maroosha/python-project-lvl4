@@ -5,7 +5,7 @@ from django.shortcuts import redirect
 from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
 from django_filters.views import FilterView
 from django.urls import reverse_lazy
-from django.contrib.auth import get_user_model
+from task_manager.users.models import User
 from .models import Task
 from .filters import FilterTasks
 from .forms import TaskForm
@@ -31,8 +31,6 @@ from .constants import (
     TASK_VIEW_TEMPLATE,
     TASK_VIEW_TITLE,
 )
-
-User = get_user_model()
 
 
 class TaskList(LoginRequiredMixin, FilterView):

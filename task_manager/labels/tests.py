@@ -1,8 +1,8 @@
 from django.test import TestCase
-from django.contrib.auth import get_user_model
 from django.urls import reverse
 from task_manager.statuses.models import Status
 from task_manager.tasks.models import Task
+from task_manager.users.models import User
 from .models import Label
 from .constants import (
     DELETE_TEMPLATE,
@@ -14,8 +14,6 @@ from .constants import (
     LABEL_LIST_TEMPLATE,
     NAME,
 )
-
-User = get_user_model()
 
 
 class LabelsTests(TestCase):

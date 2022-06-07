@@ -1,6 +1,6 @@
 from django.test import TestCase
-from django.contrib.auth import get_user_model
 from django.urls import reverse
+from task_manager.users.models import User
 from .models import Task
 from .constants import (
     DELETE_TEMPLATE,
@@ -16,8 +16,6 @@ from .constants import (
     TASK_LIST_TEMPLATE,
     NAME,
 )
-
-User = get_user_model()
 
 
 class TasksTests(TestCase):

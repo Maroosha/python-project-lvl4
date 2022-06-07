@@ -1,10 +1,8 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
-from django.db.models import ProtectedError
-from django.http import HttpResponseRedirect
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from django.urls import reverse_lazy
+from task_manager.custom_mixins import FormValidMixin
 from .models import Label
 from .forms import LabelForm
 from .constants import (
@@ -17,11 +15,9 @@ from .constants import (
     DELETE_BUTTON,
     DELETE_TEMPLATE,
     DELETE_LABEL_TITLE,
-    ERROR_LABEL_IN_USE,
     FORM_TEMPLATE,
     LABEL_CHANGED,
     LABEL_CREATED,
-    LABEL_DELETED,
     LABEL_LIST_TEMPLATE,
     LABEL_LIST_TITLE,
 )
@@ -82,25 +78,13 @@ class ChangeLabel(
 
 class Deletelabel(
     LoginRequiredMixin,
-    SuccessMessageMixin,
+    FormValidMixin,
     DeleteView,
 ):
     "Delete a label."
     model = Label
     template_name = DELETE_TEMPLATE
     success_url = reverse_lazy('labels:list')
-    success_message = LABEL_DELETED
-    error_message = ERROR_LABEL_IN_USE
-
-    def form_valid(self, form):
-        "Check if there are any tasks assigned to the given label."
-        try:
-            self.object.delete()
-        except ProtectedError:
-            messages.error(self.request, self.error_message)
-        else:
-            messages.success(self.request, self.success_message)
-        return HttpResponseRedirect(self.success_url)
 
     def get_context_data(self, **kwargs):
         "Define the title and the button."

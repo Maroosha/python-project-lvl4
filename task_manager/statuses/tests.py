@@ -1,9 +1,9 @@
 from django.test import TestCase
-from django.contrib.auth import get_user_model
 from django.urls import reverse
 from faker import Faker
-from .models import Status
 from task_manager.tasks.models import Task
+from task_manager.users.models import User
+from .models import Status
 from .constants import (
     DELETE_TEMPLATE,
     ERROR_STATUS_IN_USE,
@@ -14,8 +14,6 @@ from .constants import (
     STATUS_DELETED,
     STATUS_LIST_TEMPLATE,
 )
-
-User = get_user_model()
 
 
 class StatusesTest(TestCase):

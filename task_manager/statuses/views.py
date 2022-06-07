@@ -1,10 +1,9 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
-from django.db.models import ProtectedError
-from django.http import HttpResponseRedirect
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from django.urls import reverse_lazy
+
+from task_manager.custom_mixins import FormValidMixin
 from .models import Status
 from .forms import StatusForm
 from .constants import (
@@ -17,11 +16,9 @@ from .constants import (
     DELETE_BUTTON,
     DELETE_TEMPLATE,
     DELETE_STATUS_TITLE,
-    ERROR_STATUS_IN_USE,
     FORM_TEMPLATE,
     STATUS_CHANGED,
     STATUS_CREATED,
-    STATUS_DELETED,
     STATUS_LIST_TEMPLATE,
     STATUS_LIST_TITLE,
 )
@@ -82,25 +79,13 @@ class ChangeStatus(
 
 class DeleteStatus(
     LoginRequiredMixin,
-    SuccessMessageMixin,
+    FormValidMixin,
     DeleteView,
 ):
     'Delete a status.'
     model = Status
     template_name = DELETE_TEMPLATE
     success_url = reverse_lazy('statuses:list')
-    success_message = STATUS_DELETED
-    error_message = ERROR_STATUS_IN_USE
-
-    def form_valid(self, form):
-        "Check if there are any tasks assigned to the given status."
-        try:
-            self.object.delete()
-        except ProtectedError:
-            messages.error(self.request, self.error_message)
-        else:
-            messages.success(self.request, self.success_message)
-        return HttpResponseRedirect(self.success_url)
 
     def get_context_data(self, **kwargs):
         "Define the title and the button."

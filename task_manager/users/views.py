@@ -1,11 +1,9 @@
-from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
-from django.db.models import ProtectedError
-from django.http import HttpResponseRedirect
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from django.urls import reverse_lazy
+from task_manager.custom_mixins import FormValidMixin
 from .forms import CreateUserForm
-from django.contrib.auth import get_user_model
+from .models import User
 from .constants import (
     BUTTON_NAME_TITLE,
     BUTTON_TEXT,
@@ -15,12 +13,10 @@ from .constants import (
     DELETE_BUTTON,
     DELETE_TEMPLATE,
     DELETE_USER_TITLE,
-    ERROR_USER_IN_USE,
     FORM_TEMPLATE,
     REGISTER_BUTTON,
     USER_CHANGED,
     USER_CREATED,
-    USER_DELETED,
     USER_LIST_TEMPLATE,
     USER_LIST_TITLE,
 )
@@ -28,8 +24,6 @@ from .custom_mixins import (
     EditUserCustomMixin,
     LoginRequiredCustomMixin,
 )
-
-User = get_user_model()
 
 
 class UserList(ListView):
@@ -39,7 +33,7 @@ class UserList(ListView):
     context_object_name = 'users'
 
     def get_context_data(self, **kwargs):
-        '.'
+        'Set up the button.'
         context = super().get_context_data(**kwargs)
         context[BUTTON_NAME_TITLE] = USER_LIST_TITLE
         return context
@@ -54,7 +48,7 @@ class CreateUser(SuccessMessageMixin, CreateView):
     success_message = USER_CREATED
 
     def get_context_data(self, **kwargs):
-        "Set up the title ad the button."
+        "Set up the title and the button."
         context = super().get_context_data(**kwargs)
         context[BUTTON_NAME_TITLE] = CREATE_USER_TITLE
         context[BUTTON_TEXT] = REGISTER_BUTTON
@@ -84,16 +78,14 @@ class ChangeUser(
 
 class DeleteUser(
     LoginRequiredCustomMixin,
-    SuccessMessageMixin,
     EditUserCustomMixin,
+    FormValidMixin,
     DeleteView,
 ):
     "Delete a user."
     model = User
     template_name = DELETE_TEMPLATE
     success_url = reverse_lazy('users:list')
-    success_message = USER_DELETED
-    error_message = ERROR_USER_IN_USE
 
     def get_context_data(self, **kwargs):
         "Set up the title ad the button."
@@ -101,13 +93,3 @@ class DeleteUser(
         context[BUTTON_NAME_TITLE] = DELETE_USER_TITLE
         context[BUTTON_TEXT] = DELETE_BUTTON
         return context
-
-    def form_valid(self, form):
-        "Check if any statuses or tasks are assigned to the given user."
-        try:
-            self.object.delete()
-        except ProtectedError:
-            messages.error(self.request, self.error_message)
-        else:
-            messages.success(self.request, self.success_message)
-        return HttpResponseRedirect(self.success_url)

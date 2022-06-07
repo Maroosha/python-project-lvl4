@@ -36,10 +36,11 @@ ERROR_MESSAGES = {
 
 
 class FormValidMixin(AccessMixin):
-    "Check if any other objects are linked to the given object."
+    """Check if any other objects are linked to the given object,
+    show correspoding mesages and do redirects."""
 
     def form_valid(self, form):
-        "Check if there are any tasks assigned to the given status."
+        "Check if any other objects are linked to the given object."
         try:
             model_name = str(self.object.__class__.__name__)
             self.object.delete()
